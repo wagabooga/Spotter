@@ -1,0 +1,40 @@
+MIDTERM QUESTIONS:
+
+ERDS:::
+How would I go about adding notifications? something similar to twitter where whenever somone reacts with your tweet it gives you a notification
+
+For messaging, would it be easier to just AJAX msgs with each user being convo x (i.e. user 1 and user 2 convo is convo1), and how would that fit in the DB?
+two join tables
+many-many-many
+sender -> msg -> reciever
+
+spotify uses:
+AUTH_URL : spotify authorization url, add permissions that users can read (optional, making the auth url a permission from spotify instead) -> url code
+save code url to profile
+access_token
+refresh_token
+
+
+MVP:
+can listen*(first?)
+can CRUD tweets (own)
+can like/interact with post
+can like via spotify
+login links up with spotify
+can login
+has profiles
+notifications
+
+playerbar:
+- toggle for viewing/hiding
+
+profilepage:
+- (amount) following + (amount) followers
+- joined date
+
+settings:
+- light/dark mode toggle
+- header as faviroute song (maybe settings)
+
+stretch/flex:
+- add conversations
