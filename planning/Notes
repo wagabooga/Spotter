@@ -1,5 +1,3 @@
-MIDTERM QUESTIONS:
-
 ERDS:::
 How would I go about adding notifications? something similar to twitter where whenever somone reacts with your tweet it gives you a notification
 
@@ -14,7 +12,7 @@ save code url to profile
 access_token
 refresh_token
 
-
+---------------------------------------------------------------------------------
 MVP:
 can listen*(first?)
 can CRUD tweets (own)
@@ -38,3 +36,7 @@ settings:
 
 stretch/flex:
 - add conversations
+
+-------------------------------------------------------------------------
+links
+google doc 

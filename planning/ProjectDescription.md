@@ -20,10 +20,15 @@
 - as a user I can deactivate/draft a tweet***
 - when a tweet is retweeted, it should show the person who RT'd aswell as a way to navigate to the original tweet **-*
 - as a user I can change my header to be my faviroute song **
+#Wireframes
+https://docs.google.com/document/d/1bVqYGwY8O5M3hRBpBJ0DR1dShyzBAqMCkB-WOwOipv8/edit
 
 #Stack Choices
 - React
 - node/express
 - Spotify
 - PostgreSQL
+
+-------------------------------------------------------------------------
+
 
