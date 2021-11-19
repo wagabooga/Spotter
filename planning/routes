@@ -1,14 +1,18 @@
 Routes
 Login page
 /api/login
+
 Profile page
 /username
 /likes
 /   ## has all tweets
 /username/tweet@id
+
 Notification page
 /notification
+
 home page
 /home
+
 Setting 
 /setting/account
