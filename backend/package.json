@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/wagabooga/Spotter#readme",
   "dependencies": {
+    "cookieparser": "^0.1.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "pg": "^8.7.1"
