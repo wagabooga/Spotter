@@ -18,10 +18,10 @@ app.get('/', (req, res) => {
 
 // /login will just be a button because i want ot keeep it simple
 app.get('/login', (req, res) => {
-  // console.log("req.query", req.query)
+  console.log("req.query", req.query)
   const code = req.query.code
   const spotifyApi = new SpotifyWebApi({
-    clientId: '86d3fd8f8c9b490f9aa888ed86462f3d',
+    clientId: '2ba6a26f22d5402f89221cafec752d8b',
     clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
     redirectUri: 'http://localhost:8000/login'
   });
@@ -31,6 +31,7 @@ app.get('/login', (req, res) => {
     .authorizationCodeGrant(code)
     .then(data => {
       console.log("data:", data)
+      // move this into the header before res.json
       res.json({
         accessToken: data.body.access_token,
         refreshToken: data.body.refresh_token,
