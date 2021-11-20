@@ -5,6 +5,7 @@ const express = require('express')
 const app = express()
 const port = process.env.PORT || 8000
 const SpotifyWebApi = require('spotify-web-api-node');
+const morgan = require("morgan")
 
 // MH Note: Spotify is tricky
 // const spotifyAPIRoutes = require("./routes (api)/spotify.js");
@@ -14,6 +15,9 @@ app.get('/', (req, res) => {
   res.send('Hello World! from the backend. remember to use routes(api)[filename] path')
 })
 
+
+const homeRoutes = require("./routes (api)/home.js");
+app.use("/home", homeRoutes(db));
 
 
 // /login will just be a button because i want ot keeep it simple
@@ -43,8 +47,6 @@ app.get('/login', (req, res) => {
       res.sendStatus(400)
     })
 }),
-
-
   // Start Server
   app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
@@ -57,8 +59,8 @@ app.get('/login', (req, res) => {
 
 
 // ------------------------- PG database client/connection setup -------------------------
-// const cookieParser = require("cookie-parser"); // Note: (npm install cookieparser)
-// const { Pool } = require("pg");
-// const dbParams = require("./lib/db.js");
-// const db = new Pool(dbParams);
-// db.connect();
+const cookieParser = require("cookie-parser"); // Note: (npm install cookieparser)
+const { Pool } = require("pg");
+const dbParams = require("./lib/db.js");
+const db = new Pool(dbParams);
+db.connect();
