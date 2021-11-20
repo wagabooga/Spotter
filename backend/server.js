@@ -25,6 +25,7 @@ app.get('/login', (req, res) => {
     clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
     redirectUri: 'http://localhost:8000/login'
   });
+  
 
   spotifyApi
     .authorizationCodeGrant(code)
