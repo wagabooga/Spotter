@@ -1,0 +1,60 @@
+home:
+we need to get spotify user image
+we need to get all tweets from users I follow, with all tweet info
+
+search bar:
+query -> select * from users where username = $1 ("ancou")
+stretch* playing songs
+
+######################### tweet-container: ###############################
+1)
+form{
+	search box for spotify:
+	text box for messages
+	button to post
+}
+2) (view/interact with tweet)
+component{
+	user image,
+	spotify information,
+	tweet-text,
+	href -> comments
+	button that changes favourite bool
+	button that retweets(change user_id, and is_respot bool) to create a new 		tweet
+}
+###########################################################################
+
+home left-side-bar
+
+component{
+	have spotify image (probably div)
+	spotter
+	4 buttons that redirect respectively (own button components)
+}
+
+###########################################################################
+middle container
+
+header-div{
+	tweet-container(1)
+}
+
+<div for tweets>
+tweet-container(2)
+tweet-container(2)
+tweet-container(2)
+tweet-container(2)
+</div>
+############################################################################
+right side-bar
+search form
+
+
+
+
+
+
+
+
+refresh spotterToken every once in awhile
+
