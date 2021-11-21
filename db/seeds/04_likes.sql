@@ -1,11 +1,4 @@
-INSERT INTO likes (spot_id, user_id, spot_id) VALUES (
-  '2', '2'
-  );
-
-  INSERT INTO likes (spot_id, user_id, spot_id) VALUES (
-  '1', '2'
-  );
-
-  INSERT INTO likes (spot_id, user_id, spot_id) VALUES (
-  '1', '1'
-  );
+INSERT INTO likes (user_id, spots_id) VALUES 
+(2, 1),
+(1, 2),
+(1, 3);

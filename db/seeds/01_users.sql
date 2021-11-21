@@ -1,7 +1,3 @@
-INSERT INTO users (name, email, password, username, spotify_auth_token, date_created) VALUES (
-  'Richard Hammond', 'rhammond@gmail.com', 'password','rhammond', 'auth_token','created_at'
-  );
-
-  INSERT INTO users (name, email, password, username, spotify_auth_token, date_created) VALUES (
-  'James May', 'jmay@gmail.com','password','jmay','auth_token','created_at'
-  );
+INSERT INTO users (name, email, password, username, spotify_auth_token, date_created) VALUES 
+('Matthew', 'matthew@gmail.com', 'password','wagabooga', 'auth_token','2021-11-15'),
+('Sarah', 'sarah@gmail.com','password','sarahUsername','auth_token','2021-11-15');
