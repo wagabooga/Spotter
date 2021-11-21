@@ -8,7 +8,14 @@ const SpotifyWebApi = require('spotify-web-api-node');
 const morgan = require("morgan")
 const cors = require("cors");
 app.use(cors());
-
+// ------------------------- db config -------------------------
+const { Pool } = require("pg");
+const dbParams = require("./lib/db.js");
+const db = new Pool(dbParams);
+db.connect(() => {
+  console.log("Connected to database")
+});
+// ------------------------- Spotify web api node -------------------------
 // https://github.com/thelinmichael/spotify-web-api-node <--- read me for questions about spotifyApiWrapper (in the post they have it as spotifyApi)
 const spotifyApiWrapper = new SpotifyWebApi({
   clientId: '2ba6a26f22d5402f89221cafec752d8b',
@@ -35,6 +42,8 @@ app.use("/login", loginRoutes(spotifyApiWrapper));
 const spotifyRoutes = require("./routes (api)/spotify.js");
 app.use("/spotify", spotifyRoutes(spotifyApiWrapper));
 
+const userRoutes = require("./routes (api)/users.js");
+app.use("/users", userRoutes(db));
 
 // ------------------------- Start Server -------------------------
 app.listen(port, () => {
@@ -49,7 +58,3 @@ app.listen(port, () => {
 
 // ------------------------- PG database client/connection setup -------------------------
 // const cookieParser = require("cookie-parser"); // Note: (npm install cookieparser)
-// const { Pool } = require("pg");
-// const dbParams = require("./lib/db.js");
-// const db = new Pool(dbParams);
-// db.connect();

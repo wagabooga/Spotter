@@ -30,6 +30,7 @@ module.exports = (spotifyApiWrapper) => {
     // we update our spotifyApiWrapper (located in server.js and add our accesToken and refreshToken )
     spotifyApiWrapper
       .authorizationCodeGrant(code)
+      // if data returns 200 setCredientials + cookie/local session jwt
       .then(data => {
         console.log("data:", data)
         spotifyApiWrapper.setCredentials({
