@@ -9,6 +9,7 @@ const morgan = require("morgan")
 const cors = require("cors");
 app.use(cors());
 
+// https://github.com/thelinmichael/spotify-web-api-node <--- read me for questions about spotifyApiWrapper (in the post they have it as spotifyApi)
 const spotifyApiWrapper = new SpotifyWebApi({
   clientId: '2ba6a26f22d5402f89221cafec752d8b',
   clientSecret: process.env.SPOTIFY_CLIENT_SECRET,

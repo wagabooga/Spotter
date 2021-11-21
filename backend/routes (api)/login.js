@@ -23,12 +23,11 @@ module.exports = (spotifyApiWrapper) => {
   });
 
 
-
+  // we get the code after the /redirect request
   router.get('/code', (req, res) => {
     console.log("req.query", req.query)
     const code = req.query.code
-    
-  
+    // we update our spotifyApiWrapper (located in server.js and add our accesToken and refreshToken )
     spotifyApiWrapper
       .authorizationCodeGrant(code)
       .then(data => {
@@ -37,7 +36,6 @@ module.exports = (spotifyApiWrapper) => {
           accessToken: data.body.access_token,
           refreshToken: data.body.refresh_token
         });
-        
         // move data somewhere (db), .then(() => res.redirect )
         res.json({
           accessToken: data.body.access_token,
