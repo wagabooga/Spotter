@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS users CASCADE;
-CREATE TABLE likes (
+CREATE TABLE follows (
   id SERIAL PRIMARY KEY NOT NULL,
   followed_by INTEGER REFERENCES users(id),
   follows INTEGER REFERENCES users(id)
