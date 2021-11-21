@@ -5,26 +5,30 @@
 const express = require("express");
 const router = express.Router();
 
-// MH Note: Boilerplate for queries
-// -------------------------------------
-// const queryTable = function (db) {
-//   let query = `SELECT * FROM table WHERE table.id = $1`;
-//   return db.query(query, [$1 <-- this as a variable (what you want the $1 to be)])
-//    .then((data) => {
-//     return data.rows;
-//   });
-// };
-// -------------------------------------
-// module.exports = (db) => {
-//   router.get("/", (req, res) => {
-//     queryTable(db)
-//       .then((data) => {
-//         res.json(data);
-//       })
-//       .catch((err) => {
-//         res.status(500).json({ error: err.message });
-//       });
-//   });
-//   return router;
-// };
-// -------------------------------------
+
+
+module.exports = (spotifyApiWrapper) => {
+  /*  getUserPlaylists('*spotify username*')
+      {
+        "href":"https://api.spotify.com/v1/users/wagabooga/playlists?offset=0&limit=20",
+        "items":[{"collaborative":false,
+        "description":"funky + rando",
+        "external_urls":{"spotify":"https://open.spotify.com/playlist/31C8S7xQbbtpLRmlZ1xOTM"},
+        "href":"https://api.spotify.com/v1/playlists/31C8S7xQbbtpLRmlZ1xOTM",
+        "id":"31C8S7xQbbtpLRmlZ1xOTM",
+        "images":[{"height":640,"url":"https://mosaic.scdn.co/640/ab67616d0000b2734bac7a0f6b01f294e7af818cab67616d0000b273879e9318cb9f4e05ee552ac9ab67616d0000b273a1d785640d9421ec17ea8fe6ab67616d0000b273a47ee7a49c53ccdcb38dc874","width":640},
+        {"height":300,"url":"https://mosaic.scdn.co/300/ab67616d0000b2734bac7a0f6b01f294e7af818cab67616d0000b273879e9318cb9f4e05ee552ac9ab67616d0000b273a1d785640d9421ec17ea8fe6ab67616d0000b273a47ee7a49c53ccdcb38dc874","width":300},
+        {"height":60,"url":"https://mosaic.scdn.co/60/ab67616d0000b2734bac7a0f6b01f294e7af818cab67616d0000b273879e9318cb9f4e05ee552ac9ab67616d0000b273a1d785640d9421ec17ea8fe6ab67616d0000b273a47ee7a49c53ccdcb38dc874","width":60}],
+        "name":"2",
+        "owner":{"display_name":"wagabooga","external_urls":{"spotify":"https://open.spotify.com/user/wagabooga"}
+  */
+  router.get("/playlists", (req, res) => {
+    spotifyApiWrapper.getUserPlaylists('wagabooga')
+      .then(function (data) {
+        res.json(data.body)
+      }, function (err) {
+        console.log('Something went wrong!', err);
+      });
+  });
+  return router;
+};

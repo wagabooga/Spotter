@@ -1,18 +1,23 @@
 import React from 'react'
+import axios from "axios";
 
-const AUTH_URL =`https://accounts.spotify.com/
-authorize?client_id=2ba6a26f22d5402f89221cafec752d8b
-&response_type=code
-&redirect_uri=http://localhost:8000/login
-&scope=user-read-private
-%20user-read-email
-&state=some-state-of-my-choice
-&show_dialog=true`
+
 export default function LoginButton() {
+  const loginHandler = function () {
+    axios({
+      method:"get",
+      url: "http://localhost:8000/login/redirect",
+    }).then((response) => {
+      window.location.replace(`https://accounts.spotify.com/authorize?client_id=${response.data.client_id}${response.data.url_body}`)
+      return `https://accounts.spotify.com/authorize?client_id=${response.data.client_id}${response.data.url_body}`
+    })
+    .catch((err) => {console.log("myresponse:", err)})
+  }
+  
   return (
     <div>
     {/* instead of auth_URL we can go to 8000:/whatever which will redirect to spotify AUTH_URL */}
-      <a href={AUTH_URL}>aasddsdsd</a>
+      <button onClick={() => loginHandler() }>aasddsdsd</button>
     </div>
   )
 }
