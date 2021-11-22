@@ -1,8 +1,7 @@
-import React, { Fragment, useEffect } from 'react';
+// import React, { Fragment, useEffect } from 'react';
 import axios from "axios";
 
-export default function LoginButton() {
-
+export default function SpotifyButton() {
   const loginHandler = function () {
     axios({
       method: "get",
@@ -13,15 +12,14 @@ export default function LoginButton() {
     })
     .catch((err) => { console.log("myresponse:", err) })
   }
-
-  useEffect(() => {
-    // if (!sessionCookie[spotterToken]) acces
-    loginHandler()
-    // else 
-  }, [])
   return (
-    <>
-    {/* this will redirect to the backend to help login with spotify */}
-    </>
+    <button className="landing-right-container" onClick={loginHandler}> Login with Spotify</button>
   )
 }
+
+// auto redirect *keep*
+// useEffect(() => {
+//   // if (!sessionCookie[spotterToken]) acces
+//   loginHandler()
+//   // else 
+// }, [])
