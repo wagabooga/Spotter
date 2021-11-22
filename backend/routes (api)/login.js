@@ -22,27 +22,30 @@ module.exports = (spotifyApiWrapper) => {
     res.send(spotifyLoginCredentials)
   });
 
+  
 
   // we get the code after the /redirect request
   router.get('/code', (req, res) => {
-    console.log("req.query", req.query)
     const code = req.query.code
     // we update our spotifyApiWrapper (located in server.js and add our accesToken and refreshToken )
     spotifyApiWrapper
       .authorizationCodeGrant(code)
       // if data returns 200 setCredientials + cookie/local session jwt
       .then(data => {
-        console.log("data:", data)
         spotifyApiWrapper.setCredentials({
           accessToken: data.body.access_token,
           refreshToken: data.body.refresh_token
-        });
-        // move data somewhere (db), .then(() => res.redirect )
-        res.json({
-          accessToken: data.body.access_token,
-          refreshToken: data.body.refresh_token,
-          expiresIn: data.body.expires_in
         })
+        res.redirect("http://localhost:3000/home")
+        // cookie/JWT with access token somewhere
+        // with the access token being assigned somewhere, we also want a spotterToken (that signifies a user has already logged in with spotify, and that they have their accessToken in the db under their account)
+        // move data somewhere (db), .then(() => res.redirect )
+        // res.json({
+        //   accessToken: data.body.access_token,
+        //   refreshToken: data.body.refresh_token,
+        //   expiresIn: data.body.expires_in
+        // })
+        
       })
       .catch((err) => {
         console.log("err:", err)
@@ -52,5 +55,4 @@ module.exports = (spotifyApiWrapper) => {
 
   return router;
 };
-
 

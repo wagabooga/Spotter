@@ -1,5 +1,5 @@
 /*
-  All routes for Users are defined here
+  All routes for Users are defined here (order)
 
   -users/followed_by (shows all the followed by from current user)
   -users/following (shows all the users logged in user follows)
@@ -75,7 +75,19 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-
+  
+  router.post("/login", (req, res) => {
+    queryCheckInputEmailForUserID(db, req.body.email)
+      .then((userID) => {
+        res.cookie("userID", userID.id);
+        res.cookie("email", userID.email);
+        res.redirect("/");
+      })
+      .catch((error) => {
+        console.log(error);
+        res.send(error);
+      });
+  });
 
 
 

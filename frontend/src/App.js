@@ -1,19 +1,24 @@
 import './App.css';
-import React from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Link
 } from "react-router-dom";
-
+import React, { useState } from 'react';
 import LandingPage from './components/landing/LandingPage';
-import SpotifyButton from './components/landing/SpotifyButton';
 import Index from './components/homepage/Index';
+// import Register from './components/login/Register';
 
 
 
 export default function App() {
+  // const [token, setToken] = useState();
+
+  // if(!token) {
+  //   return <LandingPage setToken={setToken} />
+  // }
+
   return (
     <Router>
       <div>
@@ -25,6 +30,9 @@ export default function App() {
             <li>
               <Link to="/home">Home</Link>
             </li>
+            <li>
+              {/* <Link to="/register">Register</Link> */}
+            </li>
           </ul>
         </nav>
 
@@ -33,6 +41,7 @@ export default function App() {
         <Routes>
         <Route path="/home" element={<Index />} />
         <Route path="/landing" element={<LandingPage />} />
+        {/* <Route path="/register" element={<Register />} /> */}
         </Routes>
       </div>
     </Router>

@@ -56,5 +56,6 @@ app.listen(port, () => {
 
 
 
-// ------------------------- PG database client/connection setup -------------------------
-// const cookieParser = require("cookie-parser"); // Note: (npm install cookieparser)
+// ------------------------- LOGIN -------------------------
+// tinyapp/express_server.js
+
