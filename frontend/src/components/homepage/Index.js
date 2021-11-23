@@ -8,31 +8,10 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 
-// export default function Index() {
-//   return (
-//     <div>
-//       <div className="homepage-left-sidebar">
-//         <h1>Left</h1>
-//         <LeftSideBar />
-//       </div>
-
-//       <div className="homepage-middle-container">
-//         <h1>Middle</h1>
-//         <MiddleContainer />
-//       </div>
-
-//       <div className="homepage-right-sidebar">
-//         <h1>Right</h1>
-//         <RightSideBar />
-//       </div>
-//     </div>
-//   );
-// }
-
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
+  padding: theme.spacing(3),
+  height: "100%",
   color: theme.palette.text.secondary,
 }));
 
@@ -48,13 +27,11 @@ export default function VariableWidthGrid() {
         <Grid item xs={6}>
           <Item>
             <MiddleContainer />
-            xs=6
           </Item>
         </Grid>
         <Grid item xs={3}>
           <Item>
             <RightSideBar />
-            xs
           </Item>
         </Grid>
       </Grid>

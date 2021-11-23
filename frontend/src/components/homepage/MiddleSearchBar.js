@@ -68,7 +68,7 @@ export default function FreeSoloCreateOption() {
 
 // Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
 
-//Where we could bring in props for users
+//Where we could bring in props for spotify songs
 const top100Films = [
   { title: "The Shawshank Redemption", year: 1994 },
   { title: "The Godfather", year: 1972 },
