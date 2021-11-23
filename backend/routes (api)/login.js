@@ -8,6 +8,7 @@ const express = require("express");
 const router = express.Router();
 
 
+
 // router
 module.exports = (spotifyApiWrapper) => {
   // redirect is for when we click on front end page, we send them to  localhost:8000/login/redirect to grab the code (step 1) auth code flow
@@ -22,7 +23,7 @@ module.exports = (spotifyApiWrapper) => {
     res.send(spotifyLoginCredentials)
   });
 
-  
+
 
   // we get the code after the /redirect request
   router.get('/code', (req, res) => {
@@ -36,16 +37,15 @@ module.exports = (spotifyApiWrapper) => {
           accessToken: data.body.access_token,
           refreshToken: data.body.refresh_token
         })
-        res.redirect("http://localhost:3000/home")
-        // cookie/JWT with access token somewhere
-        // with the access token being assigned somewhere, we also want a spotterToken (that signifies a user has already logged in with spotify, and that they have their accessToken in the db under their account)
-        // move data somewhere (db), .then(() => res.redirect )
-        // res.json({
-        //   accessToken: data.body.access_token,
-        //   refreshToken: data.body.refresh_token,
-        //   expiresIn: data.body.expires_in
-        // })
-        
+        spotifyApiWrapper.getMe()
+          .then(function (rsp) {
+            req.session.accessToken = data.body.access_token
+            req.session.userEmail = rsp.body.email
+            console.log("succesfully saved accessToken in session:", req.session.accessToken, "\n successfully saved email in session", req.session.userEmail)
+            res.redirect("http://localhost:3000")
+          }, function (err) {
+            console.log('Something went wrong!', err);
+          })
       })
       .catch((err) => {
         console.log("err:", err)

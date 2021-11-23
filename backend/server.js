@@ -8,6 +8,12 @@ const SpotifyWebApi = require('spotify-web-api-node');
 const morgan = require("morgan")
 const cors = require("cors");
 app.use(cors());
+
+const session = require('express-session')
+// DO NOT DELETE THIS LINE OF CODE PLEASE IT IS VERY IMPORTANT::::::::::::: DO NOT DELETE
+app.use(session({ resave: true , secret: 'hello' , saveUninitialized: true}));
+
+
 // ------------------------- db config -------------------------
 const { Pool } = require("pg");
 const dbParams = require("./lib/db.js");
@@ -22,9 +28,6 @@ const spotifyApiWrapper = new SpotifyWebApi({
   clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
   redirectUri: 'http://localhost:8000/login/code'
 });
-
-
-
 
 
 
@@ -44,6 +47,8 @@ app.use("/spotify", spotifyRoutes(spotifyApiWrapper));
 
 const userRoutes = require("./routes (api)/users.js");
 app.use("/users", userRoutes(db));
+
+
 
 // ------------------------- Start Server -------------------------
 app.listen(port, () => {
