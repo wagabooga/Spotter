@@ -23,7 +23,7 @@ module.exports = (spotifyApiWrapper) => {
         "owner":{"display_name":"wagabooga","external_urls":{"spotify":"https://open.spotify.com/user/wagabooga"}
   */
   router.get("/playlists", (req, res) => {
-    spotifyApiWrapper.getUserPlaylists('wagabooga')
+    spotifyApiWrapper.getUserPlaylists()
       .then(function (data) {
         res.json(data.body)
       }, function (err) {

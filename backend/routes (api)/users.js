@@ -10,8 +10,13 @@
 const express = require("express");
 const router = express.Router();
 
-
-
+const queryGetMyId = function (db, email) {
+  let query = `SELECT * FROM users WHERE email = $1`;
+  return db.query(query, [email])
+    .then((data) => {
+      return data.rows;
+    });
+};
 const queryAllUsersFollowingCurrentUser = function (db, userID) {
   let query = `SELECT * FROM follows WHERE follows_id = $1`;
   return db.query(query, [userID])
@@ -29,9 +34,9 @@ const queryAllUsersIFollow = function (db, userID) {
 };
 
 
-const queryAllSpotsForUser = function (db, userID) {
-  let query = `SELECT * FROM spots WHERE user_id = $1`;
-  return db.query(query, [userID])
+const queryAllSpotsForUser = function (db, email) {
+  let query = `SELECT * FROM spots WHERE email = $1`;
+  return db.query(query, [email])
     .then((data) => {
       return data.rows;
     });
@@ -67,7 +72,7 @@ module.exports = (db) => {
   // users/spots  
   router.get("/spots", (req, res) => {
     // change 1 to be logged in user
-    queryAllSpotsForUser(db, 1)
+    queryAllSpotsForUser(db, req.session.userEmail)
       .then((data) => {
         res.json(data);
       })
@@ -76,18 +81,15 @@ module.exports = (db) => {
       });
   });
   
-  router.post("/login", (req, res) => {
-    queryCheckInputEmailForUserID(db, req.body.email)
-      .then((userID) => {
-        res.cookie("userID", userID.id);
-        res.cookie("email", userID.email);
-        res.redirect("/");
-      })
-      .catch((error) => {
-        console.log(error);
-        res.send(error);
-      });
-  });
+  // router.get("/get_my_id", (req, res) => {
+  //   queryGetMyId(db, req.session.userEmail)
+  //     .then((data) => {
+  //       res.json(data);
+  //     })
+  //     .catch((err) => {
+  //       res.status(500).json({ error: err.message });
+  //     });
+  // });
 
 
 
