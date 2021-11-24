@@ -1,5 +1,5 @@
 import React from "react";
-import SpotContainer from "./SpotContainer";
+import Spot from "./Spot";
 import MiddleSearchBar from "./MiddleSearchBar";
 import MiddleTextBox from "./MiddleTextBox";
 import Button from "./MiddlePostButton";
@@ -23,8 +23,8 @@ export default function MiddleContainer() {
         <Button />
       </div>
       <div>
-        <SpotContainer />
-        <SpotContainer />
+        <Spot />
+        <Spot />
       </div>
     </div>
   );

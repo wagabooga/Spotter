@@ -12,7 +12,7 @@ import Skeleton from "@mui/material/Skeleton";
 import Icons from "./Icons";
 
 function Media(props) {
-  const { loading = false } = props;
+  const { loading = false, avatarUrl } = props;
 
   return (
     <Card sx={{ maxWidth: "auto", m: 2 }}>
@@ -30,7 +30,8 @@ function Media(props) {
               //***user image
               alt="Ted talk"
               //***profile image for user
-              src="https://pbs.twimg.com/profile_images/877631054525472768/Xp5FAPD5_reasonably_small.jpg"
+              // src="https://pbs.twimg.com/profile_images/877631054525472768/Xp5FAPD5_reasonably_small.jpg"
+              src={avatarUrl}
             />
           )
         }
@@ -102,11 +103,11 @@ Media.propTypes = {
   loading: PropTypes.bool,
 };
 
-export default function Facebook() {
+export default function Spot(props) {
   return (
     <div>
       {/* <Media loading /> */}
-      <Media />
+      <Media avatarUrl={props.avatarUrl}/>
     </div>
   );
 }
