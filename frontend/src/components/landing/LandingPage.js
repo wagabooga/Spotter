@@ -1,6 +1,7 @@
 import React from 'react'
 import "../../styles/landingPage.css"
 import SpotifyButton from './SpotifyButton'
+
 export default function LandingPage() {
   return (
     <div className="landing-outer-container">

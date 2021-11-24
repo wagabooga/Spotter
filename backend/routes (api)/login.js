@@ -22,28 +22,35 @@ module.exports = (spotifyApiWrapper) => {
     res.send(spotifyLoginCredentials);
   });
 
+
+
+
   // we get the code after the /redirect request
-  router.get("/code", (req, res) => {
-    console.log("req.query", req.query);
-    const code = req.query.code;
+  router.get('/code', (req, res) => {
+    const code = req.query.code
+
     // we update our spotifyApiWrapper (located in server.js and add our accesToken and refreshToken )
     spotifyApiWrapper
       .authorizationCodeGrant(code)
       // if data returns 200 setCredientials + cookie/local session jwt
-      .then((data) => {
-        console.log("data:", data);
+      .then(data => {
         spotifyApiWrapper.setCredentials({
           accessToken: data.body.access_token,
-          refreshToken: data.body.refresh_token,
-        });
-        // move data somewhere (db), .then(() => res.redirect )
-        res.redirect("http://localhost:3000/home");
+          refreshToken: data.body.refresh_token
+        })
+        spotifyApiWrapper.getMe()
+          .then(function (rsp) {
+            req.session.accessToken = data.body.access_token
+            req.session.email = rsp.body.email
+            res.redirect(`http://localhost:8000/react`)
+          }, function (err) {
+            console.log('Something went wrong!', err);
+          })
       })
       .catch((err) => {
-        console.log("err:", err);
-        res.sendStatus(400);
-      });
-  });
-
+        console.log("err:", err)
+        res.sendStatus(400)
+      })
+  })
   return router;
 };
