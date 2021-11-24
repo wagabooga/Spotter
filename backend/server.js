@@ -9,11 +9,14 @@ const morgan = require("morgan")
 const cors = require("cors");
 const cookieParser = require('cookie-parser')
 const session = require('cookie-session')
+const bodyParser = require('body-parser')
 
 // DO NOT DELETE THIS LINE OF CODE PLEASE IT IS VERY IMPORTANT::::::::::::: DO NOT DELETE
 app.use(session({ name: 'spotterToken' , keys: ['1','2','3']}));
 
 app.use(cookieParser())
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 
@@ -21,6 +24,7 @@ app.use(cors());
 const { Pool } = require("pg");
 const dbParams = require("./lib/db.js");
 const db = new Pool(dbParams);
+
 db.connect(() => {
   console.log("Connected to database")
 });

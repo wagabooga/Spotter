@@ -6,7 +6,7 @@
 const { response } = require("express");
 const express = require("express");
 const router = express.Router();
-
+const axios = require('axios')
 // router
 module.exports = (spotifyApiWrapper) => {
   // redirect is for when we click on front end page, we send them to  localhost:8000/login/redirect to grab the code (step 1) auth code flow
@@ -32,7 +32,6 @@ module.exports = (spotifyApiWrapper) => {
     // we update our spotifyApiWrapper (located in server.js and add our accesToken and refreshToken )
     spotifyApiWrapper
       .authorizationCodeGrant(code)
-      // if data returns 200 setCredientials + cookie/local session jwt
       .then(data => {
         spotifyApiWrapper.setCredentials({
           accessToken: data.body.access_token,
@@ -40,9 +39,18 @@ module.exports = (spotifyApiWrapper) => {
         })
         spotifyApiWrapper.getMe()
           .then(function (rsp) {
-            req.session.accessToken = data.body.access_token
-            req.session.email = rsp.body.email
-            res.redirect(`http://localhost:8000/react`)
+            req.cookies.accessToken = data.body.access_token
+            req.cookies.email = rsp.body.email
+            axios({
+              method: "post",
+              url: "http://localhost:8000/users/create",
+              data: {email: rsp.body.email}
+            })
+            .then((id) => {
+              req.cookies.user_id = id
+              res.redirect(`http://localhost:8000/react`)
+            })
+            .catch((err) => {console.log(err)})
           }, function (err) {
             console.log('Something went wrong!', err);
           })

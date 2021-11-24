@@ -16,7 +16,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function BasicButtons() {
+export default function PostButton() {
   const classes = useStyles();
 
   return (

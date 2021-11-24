@@ -4,7 +4,7 @@ import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
 
 const filter = createFilterOptions();
 
-export default function FreeSoloCreateOption() {
+export default function SearchBySong() {
   const [value, setValue] = React.useState(null);
 
   return (

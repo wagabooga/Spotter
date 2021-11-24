@@ -1,12 +1,12 @@
 /*
-  All routes for Users are defined here (order)
+All routes for Users are defined here (order)
 
-  -users/:id/followed_by (shows all the users who follow :id)
-  -users/:id/following (shows all the users :id follows)
-  -users/:id/spots (shows all the spots for user :id)
-  -users/:id (gets all info about user:id)
-  -users/:id (gets all info about user:id)
- */
+-users/:id/followed_by (shows all the users who follow :id)
+-users/:id/following (shows all the users :id follows)
+-users/:id/spots (shows all the spots for user :id)
+-users/:id (gets all info about user:id)
+-users/:id (gets all info about user:id)
+*/
 
 const express = require("express");
 const router = express.Router();
@@ -15,46 +15,57 @@ const router = express.Router();
 const queryGetMyIdWithEmail = function (db, email) {
   let query = `SELECT id FROM users WHERE email = $1`;
   return db.query(query, [email])
-    .then((data) => {
-      return data.rows;
-    });
+  .then((data) => {
+    return data.rows;
+  });
 };
 
 const queryAllUsersFollowingUser = function (db, userID) {
   let query = `SELECT followed_by_id FROM follows WHERE follows_id = $1`;
   return db.query(query, [userID])
-    .then((data) => {
-      return data.rows;
-    });
+  .then((data) => {
+    return data.rows;
+  });
 };
 
 const queryAllUsersThatUserFollows = function (db, userID) {
   let query = `SELECT follows_id FROM follows WHERE followed_by_id = $1`;
   return db.query(query, [userID])
-    .then((data) => {
-      return data.rows;
-    });
+  .then((data) => {
+    return data.rows;
+  });
 };
 
 
 const queryAllSpotsForUser = function (db, userID) {
   let query = `SELECT * FROM spots WHERE user_id = $1`;
   return db.query(query, [userID])
-    .then((data) => {
-      return data.rows;
-    });
+  .then((data) => {
+    return data.rows;
+  });
 };
 
 const queryGetUserById = function (db, userID) {
   let query = `SELECT * FROM users WHERE id = $1`;
   return db.query(query, [userID])
-    .then((data) => {
-      return data.rows[0];
+  .then((data) => {
+    return data.rows[0];
     });
-};
+  };
+  
+  const queryAddNewUser = function (db, email, date) {
+    let query = `
+    INSERT INTO users (email, date_created) 
+    VALUES($1, current_timestamp) 
+    RETURNING *`;
+    return db.query(query, [email])
+      .then((data) => {
+        console.log("User created", data.rows[0])
+        return data.rows[0].id;
+      });
+  };
 
-
-module.exports = (db) => {
+  module.exports = (db) => {
 
   // users/:id/followed_by 
   router.get("/:id/followed_by", (req, res) => {
@@ -100,6 +111,7 @@ module.exports = (db) => {
 
   // users/:id
   router.get("/:id", (req, res) => {
+    console.log("ASDAKJSDKASJDASJD", req.cookies)
     queryGetUserById(db, req.params.id)
       .then((data) => {
         res.json(data);
@@ -109,32 +121,20 @@ module.exports = (db) => {
       });
   });
 
-  // broke
-  router.get("/my_id", (req, res) => {
-    queryGetUserById(db, req.params.id)
-      .then((data) => {
-        res.json(data);
-      })
-      .catch((err) => {
-        res.status(500).json({ error: err.message });
-      });
-  });
 
-  // users/my_id
-  // router.get("/my_id", (req, res) => {
-  //   queryGetMyIdWithEmail(db, req.params.email)
-  //     .then((data) => {
-  //       res.json(data);
-  //     })
-  //     .catch((err) => {
-  //       res.status(500).json({ error: err.message });
-  //     });
-  // });
+
+
 
   // users/create
-  // router.post("/create", (req, res) => {
-
-  // });
+  router.post("/create", (req, res) => {
+    queryAddNewUser(db, req.body.email)
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+  });
 
 
   return router;
