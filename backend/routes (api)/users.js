@@ -1,32 +1,35 @@
 /*
   All routes for Users are defined here (order)
 
-  -users/followed_by (shows all the followed by from current user)
-  -users/following (shows all the users logged in user follows)
-  -users/spots (shows all the spots for a user)
-
+  -users/:id/followed_by (shows all the users who follow :id)
+  -users/:id/following (shows all the users :id follows)
+  -users/:id/spots (shows all the spots for user :id)
+  -users/:id (gets all info about user:id)
+  -users/:id (gets all info about user:id)
  */
 
 const express = require("express");
 const router = express.Router();
 
-const queryGetMyId = function (db, email) {
-  let query = `SELECT * FROM users WHERE email = $1`;
+// if we need to access current user's id, we first must look them up in the db via their email provided via cookie
+const queryGetMyIdWithEmail = function (db, email) {
+  let query = `SELECT id FROM users WHERE email = $1`;
   return db.query(query, [email])
     .then((data) => {
       return data.rows;
     });
 };
-const queryAllUsersFollowingCurrentUser = function (db, userID) {
-  let query = `SELECT * FROM follows WHERE follows_id = $1`;
+
+const queryAllUsersFollowingUser = function (db, userID) {
+  let query = `SELECT followed_by_id FROM follows WHERE follows_id = $1`;
   return db.query(query, [userID])
     .then((data) => {
       return data.rows;
     });
 };
 
-const queryAllUsersIFollow = function (db, userID) {
-  let query = `SELECT * FROM follows WHERE followed_by_id = $1`;
+const queryAllUsersThatUserFollows = function (db, userID) {
+  let query = `SELECT follows_id FROM follows WHERE followed_by_id = $1`;
   return db.query(query, [userID])
     .then((data) => {
       return data.rows;
@@ -34,33 +37,70 @@ const queryAllUsersIFollow = function (db, userID) {
 };
 
 
-const queryAllSpotsForUser = function (db, email) {
-  let query = `SELECT * FROM spots WHERE email = $1`;
-  return db.query(query, [email])
+const queryAllSpotsForUser = function (db, userID) {
+  let query = `SELECT * FROM spots WHERE user_id = $1`;
+  return db.query(query, [userID])
     .then((data) => {
       return data.rows;
+    });
+};
+
+const queryGetUserById = function (db, userID) {
+  let query = `SELECT * FROM users WHERE id = $1`;
+  return db.query(query, [userID])
+    .then((data) => {
+      return data.rows[0];
     });
 };
 
 
 module.exports = (db) => {
 
-  // users/followed_by 
-  router.get("/followed_by", (req, res) => {
-    // change 1 to be logged in user
-    queryAllUsersFollowingCurrentUser(db, 1)
-      .then((data) => {
-        res.json(data);
+  // users/:id/followed_by 
+  router.get("/:id/followed_by", (req, res) => {
+    queryGetUserById(db, req.params.id)
+      .then((user) => {
+        queryAllUsersFollowingUser(db, user.id)
+          .then((data) => {
+            res.json(data);
+          })
+          .catch((err) => {
+            res.status(500).json({ error: err.message });
+          });
       })
-      .catch((err) => {
-        res.status(500).json({ error: err.message });
-      });
   });
 
   // users/following
-  router.get("/following", (req, res) => {
-    // change 1 to be logged in user
-    queryAllUsersIFollow(db, 1)
+  router.get("/:id/following", (req, res) => {
+    queryGetUserById(db, req.params.id)
+      .then((user) => {
+        queryAllUsersThatUserFollows(db, user.id)
+          .then((data) => {
+            res.json(data);
+          })
+          .catch((err) => {
+            res.status(500).json({ error: err.message });
+          });
+      })
+  });
+
+  // users/spots  
+  router.get("/:id/spots", (req, res) => {
+    queryGetUserById(db, req.params.id)
+      .then((user) => {
+        queryAllSpotsForUser(db, user.id)
+          .then((data) => {
+            res.json(data);
+          })
+          .catch((err) => {
+            res.status(500).json({ error: err.message });
+          });
+      })
+  });
+
+  // users/:id
+  router.get("/:id", (req, res) => {
+    queryGetUserById(db, req.params.id)
       .then((data) => {
         res.json(data);
       })
@@ -69,10 +109,9 @@ module.exports = (db) => {
       });
   });
 
-  // users/spots  
-  router.get("/spots", (req, res) => {
-    // change 1 to be logged in user
-    queryAllSpotsForUser(db, req.session.userEmail)
+  // broke
+  router.get("/my_id", (req, res) => {
+    queryGetUserById(db, req.params.id)
       .then((data) => {
         res.json(data);
       })
@@ -80,9 +119,10 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-  
-  // router.get("/get_my_id", (req, res) => {
-  //   queryGetMyId(db, req.session.userEmail)
+
+  // users/my_id
+  // router.get("/my_id", (req, res) => {
+  //   queryGetMyIdWithEmail(db, req.params.email)
   //     .then((data) => {
   //       res.json(data);
   //     })
@@ -91,6 +131,10 @@ module.exports = (db) => {
   //     });
   // });
 
+  // users/create
+  // router.post("/create", (req, res) => {
+
+  // });
 
 
   return router;

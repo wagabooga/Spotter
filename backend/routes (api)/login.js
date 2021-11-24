@@ -39,15 +39,9 @@ module.exports = (spotifyApiWrapper) => {
         })
         spotifyApiWrapper.getMe()
           .then(function (rsp) {
-            console.log("setting", req.session)
             req.session.accessToken = data.body.access_token
             req.session.email = rsp.body.email
-            req.session.save(function(err) {
-              // session saved
-            })
-            console.log("getting", req.session)
-            console.log("succesfully saved accessToken in session:", req.session.accessToken, "\n successfully saved email in session", req.session.email)
-            res.redirect("http://localhost:3000/test")
+            res.redirect(`http://localhost:8000/react`)
           }, function (err) {
             console.log('Something went wrong!', err);
           })
