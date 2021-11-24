@@ -16,7 +16,7 @@ module.exports = (spotifyApiWrapper) => {
       // incase client_id would need to seperate (or we could refactor with scopes)
       client_id: "2ba6a26f22d5402f89221cafec752d8b",
       url_body:
-        "&response_type=code&redirect_uri=http://localhost:8000/login/code&scope=user-read-private%20user-read-email&state=some-state-of-my-choice&show_dialog=true",
+        "&response_type=code&redirect_uri=http://localhost:8000/login/code&scope=user-read-private%20user-read-email%20app-remote-control%20streaming%20user-read-playback-state&state=some-state-of-my-choice&show_dialog=true",
     };
     // we are sending back to localhost:8000/login
     res.send(spotifyLoginCredentials);
@@ -48,6 +48,7 @@ module.exports = (spotifyApiWrapper) => {
             })
             .then((id) => {
               req.cookies.user_id = id
+              res.cookie("sampleCookie", data.body.access_token)
               res.redirect(`http://localhost:8000/react`)
             })
             .catch((err) => {console.log(err)})
