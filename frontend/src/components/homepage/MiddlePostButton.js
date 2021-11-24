@@ -7,9 +7,9 @@ const useStyles = makeStyles({
   btn: {
     direction: "row",
     justifyContent: "center",
-    color: "grey",
+    color: "white",
     "&:hover": {
-      backgroundColor: "white",
+      backgroundColor: "dark grey",
       color: "#1DB954",
     },
     width: "45px",

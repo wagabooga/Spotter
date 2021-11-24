@@ -2,7 +2,6 @@ import React from "react";
 import LeftSideBar from "./LeftSideBar";
 import MiddleContainer from "./MiddleContainer";
 import RightSideBar from "./RightSideBar";
-// import "../../styles/homepage.css";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -32,7 +31,7 @@ export default function VariableWidthGrid() {
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={1}>
+        <Grid container spacing={0.5}>
           <Grid item xs>
             <Item>
               <LeftSideBar />
