@@ -7,13 +7,14 @@ import Button from "./MiddlePostButton";
 export default function MiddleContainer() {
   return (
     <div>
-      <h1>HOME</h1>
+      <h2>Home</h2>
       <div>
         <MiddleSearchBar />
         <MiddleTextBox />
         <Button />
       </div>
       <div>
+        <SpotContainer />
         <SpotContainer />
       </div>
     </div>

@@ -5,11 +5,14 @@ import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
   btn: {
-    backgroundColor: "#1DB954",
+    direction: "row",
+    justifyContent: "center",
+    color: "grey",
     "&:hover": {
-      backgroundColor: "green",
+      backgroundColor: "white",
+      color: "#1DB954",
     },
-    color: "white",
+    width: "45px",
   },
 });
 
