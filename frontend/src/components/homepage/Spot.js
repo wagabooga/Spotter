@@ -12,8 +12,24 @@ import Skeleton from "@mui/material/Skeleton";
 import Icons from "./Icons";
 
 function Media(props) {
-  const { loading = false, avatarUrl } = props;
+  console.log(props)
+  const { loading = false } = props;
+    const { 
+    date_created, 
+    id, 
+    is_respot, 
+    spot_text,
+    spotify_json, 
+    user_id 
+  } = props.spotInfo || null;
 
+  const { 
+    artist,
+    title,
+    uri,
+    albumUrl
+  } = spotify_json ? spotify_json:"";
+  
   return (
     <Card sx={{ maxWidth: "auto", m: 2 }}>
       <CardHeader
@@ -31,7 +47,7 @@ function Media(props) {
               alt="Ted talk"
               //***profile image for user
               // src="https://pbs.twimg.com/profile_images/877631054525472768/Xp5FAPD5_reasonably_small.jpg"
-              src={avatarUrl}
+              src={`https://pbs.twimg.com/profile_images/877631054525472768/Xp5FAPD5_reasonably_small.jpg`}
             />
           )
         }
@@ -70,7 +86,7 @@ function Media(props) {
           //***would come from the middle search box component with song */
           component="img"
           height="140"
-          image="https://pi.tedcdn.com/r/talkstar-photos.s3.amazonaws.com/uploads/72bda89f-9bbf-4685-910a-2f151c4f3a8a/NicolaSturgeon_2019T-embed.jpg?w=512"
+          image={albumUrl}
           alt="Nicola Sturgeon on a TED talk stage"
         />
       )}
@@ -104,10 +120,11 @@ Media.propTypes = {
 };
 
 export default function Spot(props) {
+
   return (
     <div>
       {/* <Media loading /> */}
-      <Media avatarUrl={props.avatarUrl}/>
+      <Media spotInfo={props.spotInfo}/>
     </div>
   );
 }

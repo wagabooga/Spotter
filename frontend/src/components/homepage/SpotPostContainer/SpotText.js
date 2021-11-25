@@ -21,6 +21,7 @@ export default function SpotText(props) {
         }
       }).then((response) => {
         console.log("axios response after post", response)
+        props.setNewPost(true)
       })
         .catch((err) => { console.log("err:", err) })
     }

@@ -3,15 +3,18 @@ import Spot from './Spot'
 
 
 export default function SpotList(props) {
-  const spotListElements = props.spots.map((spot) => {
+  console.log("props HERE", props)
+  const spotListElements = props.spots ? props.spots.map((spot) => {
     // spot will have json data
-    return <Spot avatarUrl={spot.avatarUrl}/>
-  });
-  
+    console.log("spot in SpotList", spot)
+    return <Spot spotInfo={spot} />
+  }) : ""
+
+
   return (
     <div>
       {spotListElements}
     </div>
-    
+
   )
 }

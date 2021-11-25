@@ -5,7 +5,7 @@ import { SelectedSong } from './SelectedSong.js'
 
 
 
-export default function SpotPostContainer() {
+export default function SpotPostContainer({ setNewPost }) {
   const [selectedSongData, setSelectedSongData] = useState(null)
   const [spotTextValue, setSpotTextValue] = useState("")
 
@@ -15,7 +15,7 @@ export default function SpotPostContainer() {
 
       {!selectedSongData && <SearchBySong setSelectedSongData={setSelectedSongData} />}
       {selectedSongData && <SelectedSong {...selectedSongData} deselect={() => { setSelectedSongData(null) }} />}
-      <SpotText spotTextValue={spotTextValue} setSpotTextValue={setSpotTextValue} selectedSongData={selectedSongData}  />
+      <SpotText spotTextValue={spotTextValue} setSpotTextValue={setSpotTextValue} selectedSongData={selectedSongData} setNewPost={setNewPost} />
     </div>
   )
 }
