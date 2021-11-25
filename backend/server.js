@@ -42,9 +42,7 @@ const spotifyApiWrapper = new SpotifyWebApi({
 app.get('/', (req, res) => {
   res.send('Hello World! from the backend. remember to use routes(api)[filename] path')
 })
-app.get('/', (req, res) => {
-  res.redirect('/react/')
-})
+
 app.get('/landing', (req, res) => {
   res.redirect('/react/landing')
 })
@@ -64,12 +62,11 @@ app.use("/spotify", spotifyRoutes(spotifyApiWrapper));
 const userRoutes = require("./routes (api)/users.js");
 app.use("/users", userRoutes(db));
 
-
 const reactRoutes = require("./frontendRoutes/react.js");
 app.use("/react", reactRoutes());
 
-
-
+const spotRoutes = require("./routes (api)/spots.js");
+app.use("/spots", spotRoutes(db));
 
 
 // ------------------------- Start Server -------------------------
