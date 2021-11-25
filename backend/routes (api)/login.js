@@ -37,29 +37,31 @@ module.exports = (spotifyApiWrapper) => {
           accessToken: data.body.access_token,
           refreshToken: data.body.refresh_token
         })
-        spotifyApiWrapper.getMe()
-          .then(function (rsp) {
-            req.cookies.accessToken = data.body.access_token
-            req.cookies.email = rsp.body.email
-            axios({
-              method: "post",
-              url: "http://localhost:8000/users/create",
-              data: {email: rsp.body.email}
-            })
-            .then((id) => {
-              req.cookies.user_id = id
-              res.cookie("sampleCookie", data.body.access_token)
-              res.redirect(`http://localhost:8000/react`)
-            })
-            .catch((err) => {console.log(err)})
-          }, function (err) {
-            console.log('Something went wrong!', err);
-          })
+        req.cookies.accessToken = data.body.access_token
+        res.cookie("sampleCookie", data.body.access_token)
+        return spotifyApiWrapper.getMe()
+      })
+      .then(function (rsp) {
+        req.cookies.email = rsp.body.email
+        return axios({
+          method: "post",
+          url: "http://localhost:8000/users/create",
+          data: { email: rsp.body.email }
+        })
+      })
+      .then((id) => {
+        req.cookies.user_id = id
+        return spotifyApiWrapper.getMyDevices()
+      })
+      .then((response) => {
+        res.cookie("device", response.body.devices[0].id)
+        res.redirect(`http://localhost:8000/react`)
+
       })
       .catch((err) => {
         console.log("err:", err)
         res.sendStatus(400)
       })
-  })
-  return router;
-};
+    })
+    return router;
+  };

@@ -20,17 +20,19 @@ import Cookies from 'universal-cookie';
 
 export default function App() {
   const cookies = new Cookies();
-  let accessTokenFrontend = cookies.get('sampleCookie')
+  let accessToken = cookies.get('sampleCookie')
+  let device = cookies.get('device')
 
-  // useEffect(() => {
-  //   fetch(`https://api.spotify.com/v1/me/player/play?device_id=${id}`, {
-  //     method: 'PUT',
-  //     body: JSON.stringify({ uris: [spotify_uri] }),
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Authorization': `Bearer ${access_token}`
-  //     },
-  //   });
+  let playButton = function (accessToken, device) {
+    fetch(`https://api.spotify.com/v1/me/player/play?device_id=${device}`, {
+      method: 'PUT',
+      body: JSON.stringify({ uris: ["spotify:track:7xGfFoTpQ2E7fRF5lN10tr"] }),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      }
+    })
+  }
   // }, [])
   // const play = ({
   //   spotify_uri,
@@ -69,13 +71,13 @@ export default function App() {
               <Link to="/home">Home</Link>
             </li>
             <li>
-              {/* <Link to="/register">Register</Link> */}
+              <button onClick={() => {playButton(accessToken, device)}}>Play</button>
             </li>
           </ul>
         </nav>
         <Routes>
           <Route path="/home" element={<Home />} />
-          <Route path="/landing" element={<LandingPage />} />
+          <Route path="/landing" element={<LandingPage playButton={playButton} />} />
           {/* <Route path="/register" element={<Register />} /> */}
         </Routes>
       </div>
