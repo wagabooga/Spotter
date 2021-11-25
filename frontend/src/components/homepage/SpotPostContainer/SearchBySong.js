@@ -1,7 +1,7 @@
 import * as React from "react";
 import TextField from "@mui/material/TextField";
-import  { createFilterOptions } from "@mui/material/Autocomplete"; // Autocomplete, {}
-import SearchSpotify from "./SearchSpotify.js"
+import { createFilterOptions } from "@mui/material/Autocomplete"; // Autocomplete, {}
+import SearchSpotify from "./SearchSpotify.js";
 const filter = createFilterOptions();
 
 export default function SearchBySong(props) {
@@ -20,15 +20,13 @@ export default function SearchBySong(props) {
     } else {
       setValue(newValue);
     }
-  }
+  };
 
-  let filterOptionsHandler =(options, params) => {
+  let filterOptionsHandler = (options, params) => {
     const filtered = filter(options, params);
     const { inputValue } = params;
     // Suggest the creation of a new value
-    const isExisting = options.some(
-      (option) => inputValue === option.title
-    );
+    const isExisting = options.some((option) => inputValue === option.title);
     if (inputValue !== "" && !isExisting) {
       filtered.push({
         inputValue,
@@ -36,14 +34,13 @@ export default function SearchBySong(props) {
       });
     }
     return filtered;
-  }
+  };
   return (
     <SearchSpotify
       setSelectedSongData={props.setSelectedSongData}
       value={value}
       onChange={onChangeHandler}
       filterOptions={filterOptionsHandler}
-
       selectOnFocus
       clearOnBlur
       handleHomeEndKeys

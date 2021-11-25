@@ -6,7 +6,7 @@
 const { response } = require("express");
 const express = require("express");
 const router = express.Router();
-const axios = require('axios')
+const axios = require("axios");
 // router
 module.exports = (spotifyApiWrapper) => {
   // redirect is for when we click on front end page, we send them to  localhost:8000/login/redirect to grab the code (step 1) auth code flow
@@ -22,46 +22,42 @@ module.exports = (spotifyApiWrapper) => {
     res.send(spotifyLoginCredentials);
   });
 
-
-
-
   // we get the code after the /redirect request
-  router.get('/code', (req, res) => {
-    const code = req.query.code
+  router.get("/code", (req, res) => {
+    const code = req.query.code;
 
     // we update our spotifyApiWrapper (located in server.js and add our accesToken and refreshToken )
     spotifyApiWrapper
       .authorizationCodeGrant(code)
-      .then(data => {
+      .then((data) => {
         spotifyApiWrapper.setCredentials({
           accessToken: data.body.access_token,
-          refreshToken: data.body.refresh_token
-        })
-        req.cookies.accessToken = data.body.access_token
-        res.cookie("sampleCookie", data.body.access_token)
-        return spotifyApiWrapper.getMe()
+          refreshToken: data.body.refresh_token,
+        });
+        req.cookies.accessToken = data.body.access_token;
+        res.cookie("sampleCookie", data.body.access_token);
+        return spotifyApiWrapper.getMe();
       })
       .then(function (rsp) {
-        req.cookies.email = rsp.body.email
+        req.cookies.email = rsp.body.email;
         return axios({
           method: "post",
           url: "http://localhost:8000/users/create",
-          data: { email: rsp.body.email }
-        })
+          data: { email: rsp.body.email },
+        });
       })
       .then((id) => {
-        req.cookies.user_id = id
-        return spotifyApiWrapper.getMyDevices()
+        req.cookies.user_id = id;
+        return spotifyApiWrapper.getMyDevices();
       })
       .then((response) => {
-        res.cookie("device", response.body.devices[0].id)
-        res.redirect(`http://localhost:8000/react`)
-
+        res.cookie("device", response.body.devices[0].id);
+        res.redirect(`http://localhost:8000/react`);
       })
       .catch((err) => {
-        console.log("err:", err)
-        res.sendStatus(400)
-      })
-    })
-    return router;
-  };
+        console.log("err:", err);
+        res.sendStatus(400);
+      });
+  });
+  return router;
+};
