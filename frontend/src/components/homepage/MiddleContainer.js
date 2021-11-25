@@ -1,8 +1,7 @@
 import React from "react";
-import PostIndex from "./SpotPostContainer/PostIndex.js"
 import { makeStyles } from "@mui/styles";
 import SpotList from "./SpotList";
-
+import SpotPostContainer from "./SpotPostContainer/SpotPostContainer.js";
 const useStyles = makeStyles({
   text: {
     color: "#1DB954",
@@ -28,9 +27,24 @@ const spots = [
 
 
 
+// const [isPost, setisPosting] = useState("")
 
-
-
+// useEffect(() => {
+//   const fetchSpots = () => {
+//     console.log("replace me")
+//     // this is where the axios get goes
+//     axios({
+//       method: "get",
+//       url: "http://localhost:8000/login/redirect",
+//     }).then(() => {
+//       // setSpots here
+//     }).catch((err) => {
+//       console.log(err)
+//     })
+//   }
+//   // do function call here to get spots ^
+//   fetchSpots()
+// }, [isPosting])
 
 
 export default function MiddleContainer() {
@@ -40,9 +54,9 @@ export default function MiddleContainer() {
     <div className={classes.text}>
       <h2>Home</h2>
       <div>
-        <PostIndex/>
+        <SpotPostContainer />
       </div>
-      <SpotList spots={spots}/>
+      <SpotList spots={spots} />
     </div>
   );
 }

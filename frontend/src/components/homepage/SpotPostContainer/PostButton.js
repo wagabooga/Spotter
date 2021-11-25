@@ -16,13 +16,13 @@ const useStyles = makeStyles({
   },
 });
 
-export default function PostButton() {
+export default function PostButton(props) {
   const classes = useStyles();
 
   return (
     <Stack spacing={2} direction="row" justifyContent="end">
       <Button
-        onClick={() => console.log("you clicked me")}
+        onClick={props.onClick}
         className={classes.btn}
         variant="text"
       >

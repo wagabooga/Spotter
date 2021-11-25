@@ -8,7 +8,7 @@ import {
 import React, { useState } from 'react';
 import LandingPage from './components/landing/LandingPage';
 import Home from './components/homepage/Index';
-// import { useEffect } from 'react';
+import SpotifyPlayer from 'react-spotify-web-playback';
 
 import Cookies from 'universal-cookie';
 
@@ -26,7 +26,7 @@ export default function App() {
   let playButton = function (accessToken, device) {
     fetch(`https://api.spotify.com/v1/me/player/play?device_id=${device}`, {
       method: 'PUT',
-      body: JSON.stringify({ uris: ["spotify:track:7xGfFoTpQ2E7fRF5lN10tr"] }),
+      body: JSON.stringify({ uris: ["spotify:track:1ACZpHI5vZ5Ea4xGlkdGWM"] }),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${accessToken}`
@@ -71,7 +71,7 @@ export default function App() {
               <Link to="/home">Home</Link>
             </li>
             <li>
-              <button onClick={() => {playButton(accessToken, device)}}>Play</button>
+              <button onClick={() => { playButton(accessToken, device) }}>Play</button>
             </li>
           </ul>
         </nav>
@@ -80,6 +80,12 @@ export default function App() {
           <Route path="/landing" element={<LandingPage playButton={playButton} />} />
           {/* <Route path="/register" element={<Register />} /> */}
         </Routes>
+      </div>
+      <div>
+        <SpotifyPlayer
+          token={accessToken}
+          uris={['spotify:artist:6HQYnRM4OzToCYPpVBInuU']}
+        />;
       </div>
     </Router>
   );

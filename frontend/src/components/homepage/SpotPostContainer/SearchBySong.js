@@ -4,48 +4,50 @@ import  { createFilterOptions } from "@mui/material/Autocomplete"; // Autocomple
 import SearchSpotify from "./SearchSpotify.js"
 const filter = createFilterOptions();
 
-export default function SearchBySong() {
+export default function SearchBySong(props) {
   const [value, setValue] = React.useState(null);
 
+  let onChangeHandler = (event, newValue) => {
+    if (typeof newValue === "string") {
+      setValue({
+        title: newValue,
+      });
+    } else if (newValue && newValue.inputValue) {
+      // Create a new value from the user input
+      setValue({
+        title: newValue.inputValue,
+      });
+    } else {
+      setValue(newValue);
+    }
+  }
+
+  let filterOptionsHandler =(options, params) => {
+    const filtered = filter(options, params);
+    const { inputValue } = params;
+    // Suggest the creation of a new value
+    const isExisting = options.some(
+      (option) => inputValue === option.title
+    );
+    if (inputValue !== "" && !isExisting) {
+      filtered.push({
+        inputValue,
+        title: `Add "${inputValue}"`,
+      });
+    }
+    return filtered;
+  }
   return (
     <SearchSpotify
+      setSelectedSongData={props.setSelectedSongData}
       value={value}
-      onChange={(event, newValue) => {
-        if (typeof newValue === "string") {
-          setValue({
-            title: newValue,
-          });
-        } else if (newValue && newValue.inputValue) {
-          // Create a new value from the user input
-          setValue({
-            title: newValue.inputValue,
-          });
-        } else {
-          setValue(newValue);
-        }
-      }}
-      filterOptions={(options, params) => {
-        const filtered = filter(options, params);
+      onChange={onChangeHandler}
+      filterOptions={filterOptionsHandler}
 
-        const { inputValue } = params;
-        // Suggest the creation of a new value
-        const isExisting = options.some(
-          (option) => inputValue === option.title
-        );
-        if (inputValue !== "" && !isExisting) {
-          filtered.push({
-            inputValue,
-            title: `Add "${inputValue}"`,
-          });
-        }
-
-        return filtered;
-      }}
       selectOnFocus
       clearOnBlur
       handleHomeEndKeys
       id="free-solo-with-text-demo"
-      // options={top100Films}
       getOptionLabel={(option) => {
         // Value selected with enter, right from the input
         if (typeof option === "string") {

@@ -3,20 +3,17 @@ import { useState, useEffect } from "react"
 // import Player from "./Player"
 import TrackSearchResult from "./TrackSearchResult"
 import { Container, Form } from "react-bootstrap"
-import SongContainerThing from "./SongContainerThing"
+
 // import SpotifyWebApi from "spotify-web-api-node"
 import axios from "axios"
 
 
-export default function SearchSpotify({ code }) {
-  // const accessToken = useAuth(code)
+export default function SearchSpotify(props) {
   const [search, setSearch] = useState("")
   const [searchResults, setSearchResults] = useState([])
-  const [selectedTrack, setSelectedTrack] = useState()
-
 
   function chooseTrack(track) {
-    setSelectedTrack(track)
+    props.setSelectedSongData(track)
     setSearch(track.artist)
   }
 
@@ -69,11 +66,7 @@ export default function SearchSpotify({ code }) {
         value={search}
         onChange={e => setSearch(e.target.value)}
       />
-      {selectedTrack &&  (
-        <SongContainerThing 
-        songInfo={selectedTrack}
-        />
-      )}
+
 
       <div className="flex-grow-1 my-2" style={{ overflowY: "auto" }}>
         {searchResults.map(track => (
