@@ -30,5 +30,28 @@ module.exports = (spotifyApiWrapper) => {
         console.log('Something went wrong!', err);
       });
   });
+
+
+  router.get("/searchTrack/:id", (req, res) => {
+    spotifyApiWrapper.searchTracks(req.params.id)
+      .then(function (data) {
+        console.log("data.body.tracks.items", data.body.tracks.items)
+        res.json(data.body.tracks.items)
+      }, function (err) {
+        console.error(err);
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  });
+  router.get("/devices", (req, res) => {
+    spotifyApiWrapper.getMyDevices()
+      .then(function (data) {
+        let availableDevices = data.body.devices;
+        console.log(availableDevices);
+      }, function (err) {
+        console.log('Something went wrong!', err);
+      });
+  });
   return router;
 };

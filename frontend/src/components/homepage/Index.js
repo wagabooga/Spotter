@@ -52,3 +52,5 @@ export default function VariableWidthGrid() {
     </ThemeProvider>
   );
 }
+
+// we will need a <Player> component
