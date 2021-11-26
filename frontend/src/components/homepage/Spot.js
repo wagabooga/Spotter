@@ -70,12 +70,12 @@ function Media(props) {
         }
       />
       {loading ? (
-        <Skeleton sx={{ height: 190 }} animation="wave" variant="rectangular" />
+        <Skeleton sx={{ height: 120 }} animation="wave" variant="rectangular" />
       ) : (
         <CardMedia
           component="img"
-          height="30%"
-          image={albumUrl}
+          height="100%"
+          image={spotify_json.bigImage.url}
           onClick={() => {chooseTrack([uri])}}
           // alt="Nicola Sturgeon on a TED talk stage"
         />

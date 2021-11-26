@@ -8,8 +8,7 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Player from "./Player";
 import Cookies from "universal-cookie";
-import PlayerPopover from "./PlayerPopover";
-import Button from "@mui/material/Button";
+
 // import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 // const theme = createTheme({
@@ -35,8 +34,7 @@ export default function VariableWidthGrid() {
   const cookies = new Cookies();
   let accessToken = cookies.get("accessToken");
   const [playingTrack, setPlayingTrack] = useState([])
-  const [playerOpen, setPlayerOpen] = useState(false)
-  const buttonRef = React.useRef();
+
   let chooseTrack = function (track) {
     console.log("Choosing Track", track)
     setPlayingTrack(track)
@@ -62,9 +60,7 @@ export default function VariableWidthGrid() {
           </Item>
         </Grid>
       </Grid>
-      {/* <Button ref={buttonRef} onClick={() => { setPlayerOpen(!playerOpen) }}>TogglePlayer</Button> */}
       <Player accessToken={accessToken} playingTrack={playingTrack} />
-      {/* <PlayerPopover   anchorEl={buttonRef.current} accessToken={accessToken} playingTrack={playingTrack} playerOpen={playerOpen} /> */}
     </Box>
     // </ThemeProvider>
   );

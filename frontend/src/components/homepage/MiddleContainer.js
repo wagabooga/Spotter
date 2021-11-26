@@ -62,38 +62,40 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function MiddleContainer() {
   const classes = useStyles();
-  const [spots, setSpots] = useState("");
-  const [newPost, setNewPost] = useState(false);
 
-  // const fetchSpots = () => {
-  //   axios({
-  //     method: "get",
-  //     url: `http://localhost:8000/spots/1/following`,
-  //   }).then((followingsSpots) => {
-  //     console.log("setting spots:", followingsSpots)
-  //     setSpots(followingsSpots)
-  //   }).catch((err) => {
-  //     console.log(err)
-  //   })
-  // }
-  // const fetchSpots = async () => {
-  //   const result = await axios({
-  //     method: "get",
-  //     url: `http://localhost:8000/spots/1/following`,
-  //   });
-  //   console.log("MYRESULT:", result)
-  //   setSpots(result.data);
-  // };
-  // fetchSpots();
+  const [spots, setSpots] = useState("")
+  const [newPost, setNewPost] = useState(false)
+
 
   useEffect(() => {
     const fetchSpots = async () => {
-      const result = await axios({
+      const spotsResult = await axios({
         method: "get",
         url: `http://localhost:8000/spots/2/following`,
       });
-      console.log("MYRESULT:", result);
-      setSpots(result.data);
+
+      const spotsResultCopy = JSON.parse(JSON.stringify(spotsResult.data))
+      console.log("FFFFFFFFFFFFFFFFFFFFFFFFFFFF", spotsResult.data)
+      for (let spot of spotsResultCopy){
+        let trackUri = spot.spotify_json.uri
+        // we split because spotify:track:3Ofmpyhv5UAQ70mENzB277 = track_uri (id)
+        const trackID = trackUri.split(":")[2]
+        console.log("trackID in loop middle container",trackID)
+        const trackResult = await axios({
+          method: "get",
+          url: `http://localhost:8000/spotify/tracks/${trackID}`,
+        });
+        console.log("TRACKRESULT.DATA", trackResult.data)
+        const albumID = trackResult.data.tracks[0].album.id
+        const albumResult = await axios({
+          method: "get",
+          url: `http://localhost:8000/spotify/albums/${albumID}`,
+        }); 
+        const bigImage = albumResult.data.images[0]
+        spot.spotify_json["bigImage"] = bigImage
+      }
+      setSpots(spotsResultCopy);
+
     };
     if (spots === "") {
       fetchSpots();
