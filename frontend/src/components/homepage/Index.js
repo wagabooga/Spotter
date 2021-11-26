@@ -51,7 +51,7 @@ export default function VariableWidthGrid() {
         </Grid>
         <Grid item xs={6}>
           <Item>
-            <MiddleContainer chooseTrack={chooseTrack} />
+            <MiddleContainer playTrackAndSong={setPlayTrackAndSong} setPlay={setPlay}  />
           </Item>
         </Grid>
         <Grid item xs={3}>
@@ -59,7 +59,7 @@ export default function VariableWidthGrid() {
             <RightSideBar />
           </Item>
         </Grid>
-      <Player accessToken={accessToken} playingTrack={playingTrack} />
+      <Player accessToken={accessToken} playTrackAndSong={playTrackAndSong.playingTrack} setPlayTrackAndSong={setPlayTrackAndSong} play={playTrackAndSong.play} setPlay={setPlay}/>
       </Grid>
     </Box>
     // </ThemeProvider>

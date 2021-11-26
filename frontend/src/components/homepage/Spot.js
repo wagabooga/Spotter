@@ -14,7 +14,7 @@ import Icons from "./Icons";
 function Media(props) {
 
   console.log(props);
-  const { loading = false , chooseTrack } = props;
+  const { loading = false, playTrackAndSong, setPlay } = props;
   const { date_created, id, is_respot, spot_text, spotify_json, user_id } =
     props.spotInfo || null;
 
@@ -76,9 +76,19 @@ function Media(props) {
           component="img"
           height="100%"
           image={spotify_json.bigImage.url}
-          onClick={() => {chooseTrack([uri])}}
-          
-          // alt="Nicola Sturgeon on a TED talk stage"
+          onClick={() => {
+            // chooseTrack([uri])
+            // setPlay((prev) => !prev)
+            console.log("HLSKDFSKDFSJDFKSJDF", uri)
+            playTrackAndSong((prev) => ({
+              playingTrack: [uri],
+              play: true
+            }))
+          }
+          }
+
+
+        // alt="Nicola Sturgeon on a TED talk stage"
         />
       )}
       <CardContent>
@@ -109,7 +119,7 @@ Media.propTypes = {
 export default function Spot(props) {
   return (
     <div>
-      <Media spotInfo={props.spotInfo} chooseTrack={props.chooseTrack}/>
+      <Media spotInfo={props.spotInfo} playTrackAndSong={props.playTrackAndSong} setPlay={props.setPlay} />
     </div>
   );
 }
