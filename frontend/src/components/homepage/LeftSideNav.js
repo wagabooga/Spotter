@@ -5,7 +5,7 @@ import MenuList from "@mui/material/MenuList";
 import Stack from "@mui/material/Stack";
 import ProfilePicture from "./ProfilePicture";
 import { makeStyles } from "@mui/styles";
-
+import { Link } from "react-router-dom";
 const useStyles = makeStyles({
   leftNav: {
     color: "white",
@@ -14,6 +14,9 @@ const useStyles = makeStyles({
       color: "#1DB954",
     },
   },
+  leftNavLink: {
+    textDecoration: "none"
+  }
 });
 
 export default function MenuListComposition() {
@@ -25,7 +28,8 @@ export default function MenuListComposition() {
       <ProfilePicture />
 
       <MenuList>
-        <MenuItem className={classes.leftNav}>Home</MenuItem>
+        <Link className={classes.leftNavLink} to="/home"><MenuItem className={classes.leftNav}>Home</MenuItem></Link>
+        <Link className={classes.leftNavLink} to="/landing"><MenuItem className={classes.leftNav}>Landing</MenuItem></Link>
         <MenuItem className={classes.leftNav}>Notifications</MenuItem>
         <MenuItem className={classes.leftNav}>Messages</MenuItem>
         <MenuItem className={classes.leftNav}>Profile</MenuItem>

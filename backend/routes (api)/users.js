@@ -103,7 +103,6 @@ const queryGetUserById = function (db, userID) {
 
   // users/:id
   router.get("/:id", (req, res) => {
-    console.log("ASDAKJSDKASJDASJD", req.cookies)
     queryGetUserById(db, req.params.id)
       .then((data) => {
         res.json(data);
@@ -112,8 +111,6 @@ const queryGetUserById = function (db, userID) {
         res.status(500).json({ error: err.message });
       });
   });
-
-
 
 
 

@@ -12,12 +12,14 @@ import Skeleton from "@mui/material/Skeleton";
 import Icons from "./Icons";
 
 function Media(props) {
+
   console.log(props);
-  const { loading = false } = props;
+  const { loading = false , chooseTrack } = props;
   const { date_created, id, is_respot, spot_text, spotify_json, user_id } =
     props.spotInfo || null;
 
   const { artist, title, uri, albumUrl } = spotify_json ? spotify_json : "";
+
 
   return (
     <Card sx={{ maxWidth: "auto", m: 2 }}>
@@ -74,6 +76,7 @@ function Media(props) {
           component="img"
           height="30%"
           image={albumUrl}
+          onClick={() => {chooseTrack([uri])}}
           // alt="Nicola Sturgeon on a TED talk stage"
         />
       )}
@@ -105,8 +108,7 @@ Media.propTypes = {
 export default function Spot(props) {
   return (
     <div>
-      {/* <Media loading /> */}
-      <Media spotInfo={props.spotInfo} />
+      <Media spotInfo={props.spotInfo} chooseTrack={props.chooseTrack}/>
     </div>
   );
 }

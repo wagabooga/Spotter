@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@mui/styles";
 import SpotList from "./SpotList";
 import SpotPostContainer from "./SpotPostContainer/SpotPostContainer.js";
+
 import axios from "axios";
 
 // import * as React from "react";
@@ -9,6 +10,7 @@ import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
+
 
 const useStyles = makeStyles({
   text: {
@@ -57,10 +59,12 @@ const Item = styled(Paper)(({ theme }) => ({
 //   fetchSpots()
 // }, [isPosting])
 
+
 export default function MiddleContainer() {
   const classes = useStyles();
   const [spots, setSpots] = useState("");
   const [newPost, setNewPost] = useState(false);
+
   // const fetchSpots = () => {
   //   axios({
   //     method: "get",
@@ -114,10 +118,11 @@ export default function MiddleContainer() {
         </Grid>
       </Grid>
       <div className={classes.text}>
-        <SpotList spots={spots} />
+        <SpotList spots={spots} chooseTrack={props.chooseTrack}/>
       </div>
+
       {/* </div> */}
-      xs=8
     </Box>
+
   );
 }
