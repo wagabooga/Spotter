@@ -12,7 +12,7 @@ import Skeleton from "@mui/material/Skeleton";
 import Icons from "./Icons";
 
 function Media(props) {
-  console.log(props)
+  
   const { loading = false, chooseTrack } = props;
     const { 
     date_created, 
@@ -118,7 +118,6 @@ export default function Spot(props) {
 
   return (
     <div>
-      {/* <Media loading /> */}
       <Media spotInfo={props.spotInfo} chooseTrack={props.chooseTrack}/>
     </div>
   );

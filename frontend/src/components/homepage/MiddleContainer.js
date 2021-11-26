@@ -110,7 +110,6 @@ export default function MiddleContainer(props) {
       <div>
         <SpotList spots={spots} chooseTrack={props.chooseTrack} />
       </div>
-
     </div>
   );
 }

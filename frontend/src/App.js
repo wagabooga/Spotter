@@ -75,25 +75,6 @@ export default function App() {
     <Router>
       <ThemeProvider theme={theme}>
         <div>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/landing">Landing</Link>
-              </li>
-              <li>
-                <Link to="/home">Home</Link>
-              </li>
-              <li>
-                {/* <button
-                  onClick={() => {
-                    playButton(accessToken, device);
-                  }}
-                >
-                  Play
-                </button> */}
-              </li>
-            </ul>
-          </nav>
           <Routes>
             <Route path="/home" element={<Home />} />
             <Route

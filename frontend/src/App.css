@@ -5,6 +5,10 @@
 .MuiFormLabel-root {
   color: white !important;
 }
+.PlayerRSWP {
+  position: fixed;
+  bottom: 0;
+}
 
 /* .App {
   text-align: center;
