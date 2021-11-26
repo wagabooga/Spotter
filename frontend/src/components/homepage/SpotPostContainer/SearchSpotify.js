@@ -83,14 +83,11 @@ function SearchSpotify(props) {
             notchedOutline: classes.notchedOutline,
           },
         }}
-        style={{ color: "white" }}
         id="outlined-basic"
-        label="Song/Artist"
+        label="Search Song/Artist"
         variant="outlined"
         type="search"
         placeholder="Search Songs/Artists"
-        backgroundColor="warning"
-        color="warning"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />

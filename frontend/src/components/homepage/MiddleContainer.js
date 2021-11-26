@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@mui/styles";
 import SpotList from "./SpotList";
 import SpotPostContainer from "./SpotPostContainer/SpotPostContainer.js";
-import axios from "axios"
+import axios from "axios";
+
 const useStyles = makeStyles({
   text: {
     color: "#1DB954",
@@ -24,11 +25,6 @@ const useStyles = makeStyles({
 //   },
 // ]
 
-
-
-
-
-
 // useEffect(() => {
 //   const fetchSpots = () => {
 //     console.log("replace me")
@@ -46,11 +42,10 @@ const useStyles = makeStyles({
 //   fetchSpots()
 // }, [isPosting])
 
-
 export default function MiddleContainer() {
   const classes = useStyles();
-  const [spots, setSpots] = useState("")
-  const [newPost, setNewPost] = useState(false)
+  const [spots, setSpots] = useState("");
+  const [newPost, setNewPost] = useState(false);
   // const fetchSpots = () => {
   //   axios({
   //     method: "get",
@@ -78,27 +73,27 @@ export default function MiddleContainer() {
         method: "get",
         url: `http://localhost:8000/spots/2/following`,
       });
-      console.log("MYRESULT:", result)
+      console.log("MYRESULT:", result);
       setSpots(result.data);
     };
-    if (spots === ""){
+    if (spots === "") {
       fetchSpots();
     }
-    if (newPost === true){
+    if (newPost === true) {
       setNewPost(false);
       fetchSpots();
     }
   }, []);
-  
- 
 
   return (
-    <div className={classes.text}>
-      <h2>Home</h2>
-      <div>
-        <SpotPostContainer setNewPost={setNewPost} />
+    <div className="Post-Box">
+      <div className={classes.text}>
+        <h2>Home</h2>
+        <div>
+          <SpotPostContainer setNewPost={setNewPost} />
+        </div>
+        <SpotList spots={spots} />
       </div>
-      <SpotList spots={spots} />
     </div>
   );
 }

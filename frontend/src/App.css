@@ -6,6 +6,52 @@
   color: white !important;
 }
 
+.MuiInputBase-input {
+  color: white !important;
+  border-bottom-color: white !important;
+}
+
+.css-1x51dt5-MuiInputBase-input-MuiInput-input {
+  color: white !important;
+  border-bottom: 1px solid white !important;
+}
+
+.css-1x51dt5-MuiInputBase-input-MuiInput-input:hover {
+  color: white !important;
+  border-bottom: 1px solid white !important;
+}
+
+.css-1l5rin5-MuiInputBase-root-MuiInput-root::before {
+  border-bottom: 1px solid white !important;
+}
+
+.css-1l5rin5-MuiInputBase-root-MuiInput-root::after {
+  border-bottom: 1px solid white !important;
+}
+
+.css-185gdzj-MuiCardHeader-root {
+  color: white !important;
+}
+
+.css-1v4gzuq-MuiTypography-root {
+  color: white !important;
+}
+
+.css-boj9fp-MuiTypography-root {
+  color: white;
+}
+
+.css-185gdzj-MuiCardHeader-root {
+  background-color: #2b2c2e;
+}
+
+.css-46bh2p-MuiCardContent-root {
+  background-color: #2b2c2e;
+}
+
+.Icons {
+  background-color: #2b2c2e;
+}
 /* .App {
   text-align: center;
 }
