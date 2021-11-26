@@ -53,5 +53,16 @@ module.exports = (spotifyApiWrapper) => {
         console.log('Something went wrong!', err);
       });
   });
+
+  router.get("/album", (req, res) => {
+    spotifyApiWrapper.getAlbum('5U4W9E5WsYb2jUQWePT8Xm')
+    .then(function(data) {
+      console.log('Album information', data.body);
+    }, function(err) {
+      console.error(err);
+    });
+  });
+
+ 
   return router;
 };

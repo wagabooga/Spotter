@@ -83,7 +83,7 @@ function Media(props) {
       ) : (
         <CardMedia
           component="img"
-          height="140"
+          height="30%"
           image={albumUrl}
           // alt="Nicola Sturgeon on a TED talk stage"
         />
