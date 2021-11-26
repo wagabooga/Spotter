@@ -34,6 +34,11 @@ export default function VariableWidthGrid() {
   const cookies = new Cookies();
   let accessToken = cookies.get("accessToken");
   const [playingTrack, setPlayingTrack] = useState([])
+  const [play, setPlay] = useState(false)
+  const [playTrackAndSong, setPlayTrackAndSong] = useState({
+    playingTrack: [],
+    play: false
+  })
 
   let chooseTrack = function (track) {
     console.log("Choosing Track", track)
@@ -51,7 +56,7 @@ export default function VariableWidthGrid() {
         </Grid>
         <Grid item xs={6}>
           <Item>
-            <MiddleContainer chooseTrack={chooseTrack} />
+            <MiddleContainer chooseTrack={setPlayTrackAndSong} setPlay={setPlay}  />
           </Item>
         </Grid>
         <Grid item xs={3}>
@@ -59,8 +64,8 @@ export default function VariableWidthGrid() {
             <RightSideBar />
           </Item>
         </Grid>
+      <Player accessToken={accessToken} playingTrack={playTrackAndSong.playingTrack} playTrackAndSong={playTrackAndSong} setPlayTrackAndSong={setPlayTrackAndSong} play={playTrackAndSong.play} setPlay={setPlay}/>
       </Grid>
-      <Player accessToken={accessToken} playingTrack={playingTrack} />
     </Box>
     // </ThemeProvider>
   );
