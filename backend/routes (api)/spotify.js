@@ -44,25 +44,39 @@ module.exports = (spotifyApiWrapper) => {
         console.log(err)
       })
   });
+
   router.get("/devices", (req, res) => {
     spotifyApiWrapper.getMyDevices()
       .then(function (data) {
         let availableDevices = data.body.devices;
-        console.log(availableDevices);
+        // console.log(availableDevices);
       }, function (err) {
         console.log('Something went wrong!', err);
       });
   });
 
-  router.get("/album", (req, res) => {
-    spotifyApiWrapper.getAlbum('5U4W9E5WsYb2jUQWePT8Xm')
-    .then(function(data) {
-      console.log('Album information', data.body);
-    }, function(err) {
-      console.error(err);
-    });
+  router.get("/albums/:album_id", (req, res) => {
+    // '5U4W9E5WsYb2jUQWePT8Xm'
+    spotifyApiWrapper.getAlbum(req.params.album_id)
+      .then(function (data) {
+        console.log('Album information', data.body);
+        res.json(data.body)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   });
 
- 
+  router.get("/tracks/:track_id", (req, res) => {
+    // 4PICq5Ndi0cEWsyRAEWED6
+    spotifyApiWrapper.getTracks([req.params.track_id])
+      .then(function (data) {
+        console.log('Track information', data.body[0]);
+        res.json(data.body)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  });
   return router;
 };

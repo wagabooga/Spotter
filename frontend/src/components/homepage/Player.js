@@ -9,6 +9,7 @@ export default function Player({ accessToken, playingTrack }) {
   useEffect(() => setPlay(true), [playingTrack])
 
   if (!accessToken) return null
+  console.log("NNNNNNNNNNNNNNNNNN", playingTrack)
   return (
     <SpotifyPlayer
       token={accessToken}
