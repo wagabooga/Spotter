@@ -6,11 +6,19 @@ import { Container, Form } from "react-bootstrap";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+import { withStyles } from "@mui/styles";
 
 // import SpotifyWebApi from "spotify-web-api-node"
 import axios from "axios";
 
-export default function SearchSpotify(props) {
+const styles = (theme) => ({
+  notchedOutline: {
+    borderWidth: "1px",
+    borderColor: "white !important",
+  },
+});
+
+function SearchSpotify(props) {
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
@@ -56,6 +64,8 @@ export default function SearchSpotify(props) {
     return () => (cancel = true);
   }, [search]);
 
+  const { classes } = props;
+
   return (
     <Box
       component="form"
@@ -66,11 +76,21 @@ export default function SearchSpotify(props) {
       autoComplete="off"
     >
       <TextField
+        InputProps={{
+          classes: {
+            // root: classes.cssOutlinedInput,
+            // focused: classes.cssFocused,
+            notchedOutline: classes.notchedOutline,
+          },
+        }}
+        style={{ color: "white" }}
         id="outlined-basic"
         label="Song/Artist"
         variant="outlined"
         type="search"
         placeholder="Search Songs/Artists"
+        backgroundColor="warning"
+        color="warning"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
@@ -86,3 +106,5 @@ export default function SearchSpotify(props) {
     </Box>
   );
 }
+
+export default withStyles(styles)(SearchSpotify);
