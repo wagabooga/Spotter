@@ -58,14 +58,14 @@ function Media(props) {
               style={{ marginBottom: 6 }}
             />
           ) : (
-            `My_Username (user_id) ${user_id}`
+            `${title}`
           )
         }
         subheader={
           loading ? (
             <Skeleton animation="wave" height={10} width="40%" />
           ) : (
-            `@(user_id) ${user_id}`
+            `@${artist}`
           )
         }
       />
@@ -77,6 +77,7 @@ function Media(props) {
           height="100%"
           image={spotify_json.bigImage.url}
           onClick={() => {chooseTrack([uri])}}
+          
           // alt="Nicola Sturgeon on a TED talk stage"
         />
       )}

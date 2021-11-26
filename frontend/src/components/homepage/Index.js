@@ -59,8 +59,8 @@ export default function VariableWidthGrid() {
             <RightSideBar />
           </Item>
         </Grid>
-      </Grid>
       <Player accessToken={accessToken} playingTrack={playingTrack} />
+      </Grid>
     </Box>
     // </ThemeProvider>
   );
