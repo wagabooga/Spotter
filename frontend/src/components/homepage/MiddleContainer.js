@@ -2,8 +2,14 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@mui/styles";
 import SpotList from "./SpotList";
 import SpotPostContainer from "./SpotPostContainer/SpotPostContainer.js";
-import axios from "axios"
 
+import axios from "axios";
+
+// import * as React from "react";
+import { styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
 
 
 const useStyles = makeStyles({
@@ -11,6 +17,15 @@ const useStyles = makeStyles({
     color: "#1DB954",
   },
 });
+
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  // textAlign: "center",
+  // paddingRight: "50px",
+  marginLeft: "30px",
+  color: theme.palette.text.secondary,
+}));
 
 // const spots = [
 //   {
@@ -26,11 +41,6 @@ const useStyles = makeStyles({
 //     avatarUrl: "https://icons-for-free.com/iconfiles/png/512/instagram+original+icon-1320194901224047116.png"
 //   },
 // ]
-
-
-
-
-
 
 // useEffect(() => {
 //   const fetchSpots = () => {
@@ -50,15 +60,10 @@ const useStyles = makeStyles({
 // }, [isPosting])
 
 
-export default function MiddleContainer(props) {
+export default function MiddleContainer() {
   const classes = useStyles();
-
-
-
-
-  const [spots, setSpots] = useState("")
-  const [newPost, setNewPost] = useState(false)
-
+  const [spots, setSpots] = useState("");
+  const [newPost, setNewPost] = useState(false);
 
   // const fetchSpots = () => {
   //   axios({
@@ -87,7 +92,7 @@ export default function MiddleContainer(props) {
         method: "get",
         url: `http://localhost:8000/spots/2/following`,
       });
-      console.log("MYRESULT:", result)
+      console.log("MYRESULT:", result);
       setSpots(result.data);
     };
     if (spots === "") {
@@ -99,17 +104,25 @@ export default function MiddleContainer(props) {
     }
   }, []);
 
-
-
   return (
-    <div className={classes.text}>
-      <h2>Home</h2>
-      <div>
-        <SpotPostContainer setNewPost={setNewPost} />
+    <Box sx={{ flexGrow: 1 }}>
+      <Grid container spacing={2}>
+        <Grid item xs={11}>
+          <Item>
+            {/* <div className="Post-Box"> */}
+            <div className={classes.text}>
+              <h2>Home</h2>
+              <SpotPostContainer setNewPost={setNewPost} />
+            </div>
+          </Item>
+        </Grid>
+      </Grid>
+      <div className={classes.text}>
+        <SpotList spots={spots} chooseTrack={props.chooseTrack}/>
       </div>
-      <div>
-        <SpotList spots={spots} chooseTrack={props.chooseTrack} />
-      </div>
-    </div>
+
+      {/* </div> */}
+    </Box>
+
   );
 }

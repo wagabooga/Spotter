@@ -1,20 +1,16 @@
-import React from 'react'
-import Spot from './Spot'
-
+import React from "react";
+import Spot from "./Spot";
 
 export default function SpotList(props) {
-  console.log("props HERE", props)
-  const spotListElements = props.spots ? props.spots.map((spot) => {
-    // spot will have json data
-    console.log("spot in SpotList", spot)
-    return <Spot spotInfo={spot} chooseTrack={props.chooseTrack} />
-  }) : ""
+  console.log("props HERE", props);
+  const spotListElements = props.spots
+    ? props.spots.map((spot) => {
+        // spot will have json data
+        console.log("spot in SpotList", spot);
+        return <Spot spotInfo={spot} chooseTrack={props.chooseTrack} />;
+      })
+    : "";
 
+  return <div className="spotList">{spotListElements}</div>;
 
-  return (
-    <div>
-      {spotListElements}
-    </div>
-
-  )
 }

@@ -10,41 +10,53 @@
   bottom: 0;
 }
 
-/* .App {
-  text-align: center;
+.MuiInputBase-input {
+  color: white !important;
+  border-bottom-color: white !important;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.css-1x51dt5-MuiInputBase-input-MuiInput-input {
+  color: white !important;
+  border-bottom: 1px solid white !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* doesn't work */
+/* .css-1x51dt5-MuiInputBase-input-MuiInput-input:hover {
+  color: white !important;
+  border-bottom: 1px solid white !important;
+} */
+
+/* doesn't work */
+/* .css-1l5rin5-MuiInputBase-root-MuiInput-root::before {
+  border-bottom: 1px solid white !important;
+} */
+
+/* doesn't work */
+/* .css-1l5rin5-MuiInputBase-root-MuiInput-root::after {
+  border-bottom: 1px solid white !important;
+} */
+
+/* ----Post Boxes---- */
+.css-185gdzj-MuiCardHeader-root {
+  color: white !important;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.css-1v4gzuq-MuiTypography-root {
+  color: white !important;
+}
+
+.css-boj9fp-MuiTypography-root {
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.css-185gdzj-MuiCardHeader-root {
+  background-color: #2b2c2e;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
+.css-46bh2p-MuiCardContent-root {
+  background-color: #2b2c2e;
+}
+
+.Icons {
+  background-color: #2b2c2e;
+}
