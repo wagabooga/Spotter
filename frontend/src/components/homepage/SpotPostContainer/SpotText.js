@@ -17,8 +17,14 @@ export default function SpotText(props) {
         url: "http://localhost:8000/spots/create",
         data: {
           selectedSongData: props.selectedSongData,
-          spotTextValue: props.spotTextValue,
-        },
+
+          spotTextValue: props.spotTextValue
+        }
+      }).then((response) => {
+        console.log("axios response after post", response)
+        props.setNewPost(true)
+
+
       })
         .then((response) => {
           console.log("axios response after post", response);
