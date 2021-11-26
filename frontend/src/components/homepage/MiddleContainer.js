@@ -60,7 +60,7 @@ const Item = styled(Paper)(({ theme }) => ({
 // }, [isPosting])
 
 
-export default function MiddleContainer() {
+export default function MiddleContainer(props) {
   const classes = useStyles();
 
   const [spots, setSpots] = useState("")
