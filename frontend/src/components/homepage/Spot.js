@@ -14,7 +14,7 @@ import Icons from "./Icons";
 function Media(props) {
 
   console.log(props);
-  const { loading = false, playTrackAndSong, setPlay } = props;
+  const { loading = false, chooseTrack, setPlay } = props;
   const { date_created, id, is_respot, spot_text, spotify_json, user_id } =
     props.spotInfo || null;
 
@@ -80,7 +80,7 @@ function Media(props) {
             // chooseTrack([uri])
             // setPlay((prev) => !prev)
             console.log("HLSKDFSKDFSJDFKSJDF", uri)
-            playTrackAndSong((prev) => ({
+            chooseTrack((prev) => ({
               playingTrack: [uri],
               play: true
             }))
@@ -119,7 +119,8 @@ Media.propTypes = {
 export default function Spot(props) {
   return (
     <div>
-      <Media spotInfo={props.spotInfo} playTrackAndSong={props.playTrackAndSong} setPlay={props.setPlay} />
+      <Media spotInfo={props.spotInfo} chooseTrack={props.chooseTrack} setPlay={props.setPlay}/>
+      {/* <Media spotInfo={props.spotInfo} playTrackAndSong={props.playTrackAndSong} setPlay={props.setPlay} /> */}
     </div>
   );
 }

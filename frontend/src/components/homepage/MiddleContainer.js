@@ -120,7 +120,8 @@ export default function MiddleContainer(props) {
         </Grid>
       </Grid>
       <div className={classes.text}>
-        <SpotList spots={spots} playTrackAndSong={props.playTrackAndSong} setPlay={props.setPlay}/>
+      <SpotList spots={spots} chooseTrack={props.chooseTrack} setPlay={props.setPlay}/>
+        {/* <SpotList spots={spots} playTrackAndSong={props.playTrackAndSong} setPlay={props.setPlay}/> */}
       </div>
 
       {/* </div> */}
