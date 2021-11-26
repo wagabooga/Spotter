@@ -4,11 +4,26 @@ import SpotList from "./SpotList";
 import SpotPostContainer from "./SpotPostContainer/SpotPostContainer.js";
 import axios from "axios";
 
+// import * as React from "react";
+import { styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
+
 const useStyles = makeStyles({
   text: {
     color: "#1DB954",
   },
 });
+
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  // textAlign: "center",
+  // paddingRight: "50px",
+  marginLeft: "30px",
+  color: theme.palette.text.secondary,
+}));
 
 // const spots = [
 //   {
@@ -86,14 +101,23 @@ export default function MiddleContainer() {
   }, []);
 
   return (
-    <div className="Post-Box">
+    <Box sx={{ flexGrow: 1 }}>
+      <Grid container spacing={2}>
+        <Grid item xs={11}>
+          <Item>
+            {/* <div className="Post-Box"> */}
+            <div className={classes.text}>
+              <h2>Home</h2>
+              <SpotPostContainer setNewPost={setNewPost} />
+            </div>
+          </Item>
+        </Grid>
+      </Grid>
       <div className={classes.text}>
-        <h2>Home</h2>
-        <div>
-          <SpotPostContainer setNewPost={setNewPost} />
-        </div>
         <SpotList spots={spots} />
       </div>
-    </div>
+      {/* </div> */}
+      xs=8
+    </Box>
   );
 }
