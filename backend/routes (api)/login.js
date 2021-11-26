@@ -7,6 +7,15 @@ const { response } = require("express");
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
+
+const queryAmIRegistered = function (db, email) {
+  let query = `SELECT * FROM users WHERE email = $1`;
+  return db.query(query, [email])
+    .then((data) => {
+      return data.rows;
+    });
+};
+
 // router
 module.exports = (spotifyApiWrapper) => {
   // redirect is for when we click on front end page, we send them to  localhost:8000/login/redirect to grab the code (step 1) auth code flow
@@ -35,16 +44,19 @@ module.exports = (spotifyApiWrapper) => {
           refreshToken: data.body.refresh_token,
         });
         req.cookies.accessToken = data.body.access_token;
-        res.cookie("sampleCookie", data.body.access_token);
+        res.cookie("accessToken", data.body.access_token);
         return spotifyApiWrapper.getMe();
       })
       .then(function (rsp) {
         req.cookies.email = rsp.body.email;
-        return axios({
-          method: "post",
-          url: "http://localhost:8000/users/create",
-          data: { email: rsp.body.email },
-        });
+        if (!queryAmIRegistered) {
+          return axios({
+            method: "post",
+            url: "http://localhost:8000/users/create",
+            data: { email: rsp.body.email },
+          });
+
+        }
       })
       .then((id) => {
         req.cookies.user_id = id;
