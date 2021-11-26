@@ -44,10 +44,9 @@ function Media(props) {
           ) : (
             <Avatar
               //***user image
-              alt="Ted talk"
+              // alt="Ted talk"
               //***profile image for user
-              // src="https://pbs.twimg.com/profile_images/877631054525472768/Xp5FAPD5_reasonably_small.jpg"
-              src={`https://pbs.twimg.com/profile_images/877631054525472768/Xp5FAPD5_reasonably_small.jpg`}
+              src={`https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png`}
             />
           )
         }
@@ -68,14 +67,14 @@ function Media(props) {
               style={{ marginBottom: 6 }}
             />
           ) : (
-            "Ted"
+            `My_Username (user_id) ${user_id}`
           )
         }
         subheader={
           loading ? (
             <Skeleton animation="wave" height={10} width="40%" />
           ) : (
-            "5 hours ago"
+            `@(user_id) ${user_id}`
           )
         }
       />
@@ -83,14 +82,12 @@ function Media(props) {
         <Skeleton sx={{ height: 190 }} animation="wave" variant="rectangular" />
       ) : (
         <CardMedia
-          //***would come from the middle search box component with song */
           component="img"
           height="140"
           image={albumUrl}
-          alt="Nicola Sturgeon on a TED talk stage"
+          // alt="Nicola Sturgeon on a TED talk stage"
         />
       )}
-
       <CardContent>
         {loading ? (
           <React.Fragment>
@@ -103,13 +100,10 @@ function Media(props) {
           </React.Fragment>
         ) : (
           <Typography variant="body2" color="text.secondary" component="p">
-            {
-              "Why First Minister of Scotland Nicola Sturgeon thinks GDP is the wrong measure of a country's success:"
-            }
+            {spot_text}
           </Typography>
         )}
       </CardContent>
-
       <Icons />
     </Card>
   );
