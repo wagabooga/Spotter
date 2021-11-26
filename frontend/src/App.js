@@ -34,7 +34,7 @@ const theme = createTheme({
 
 export default function App() {
   const cookies = new Cookies();
-  let accessToken = cookies.get("sampleCookie");
+  let accessToken = cookies.get("accessToken");
   let device = cookies.get("device");
 
   let playButton = function (accessToken, device) {
