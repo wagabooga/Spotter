@@ -3,8 +3,16 @@ import TextField from "@mui/material/TextField";
 import PostButton from "./PostButton";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { withStyles } from "@mui/styles";
 
-export default function SpotText(props) {
+const styles = (theme) => ({
+  notchedOutline: {
+    borderWidth: "1px",
+    borderBottom: "white !important",
+  },
+});
+
+function SpotText(props) {
   function submitSpot() {
     console.log(
       "submitting tweet values:",
@@ -18,14 +26,13 @@ export default function SpotText(props) {
         data: {
           selectedSongData: props.selectedSongData,
 
-          spotTextValue: props.spotTextValue
-        }
-      }).then((response) => {
-        console.log("axios response after post", response)
-        props.setNewPost(true)
-
-
+          spotTextValue: props.spotTextValue,
+        },
       })
+        .then((response) => {
+          console.log("axios response after post", response);
+          props.setNewPost(true);
+        })
         .then((response) => {
           console.log("axios response after post", response);
         })
@@ -35,6 +42,7 @@ export default function SpotText(props) {
     }
   }
 
+  const { classes } = props;
   return (
     <Box
       component="form"
@@ -47,6 +55,14 @@ export default function SpotText(props) {
       {/* <TextField id="outlined-basic" label="Outlined" variant="outlined" />
       <TextField id="filled-basic" label="Filled" variant="filled" /> */}
       <TextField
+        InputProps={{
+          classes: {
+            // root: classes.cssOutlinedInput,
+            // focused: classes.cssFocused,
+            notchedOutline: classes.notchedOutline,
+          },
+        }}
+        placeholder="add a comment"
         id="standard-basic"
         variant="standard"
         value={props.spotTextValue}
@@ -58,3 +74,5 @@ export default function SpotText(props) {
     </Box>
   );
 }
+
+export default withStyles(styles)(SpotText);

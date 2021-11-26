@@ -14,27 +14,34 @@ const useStyles = makeStyles({
   favorite: {
     color: "#1DB954",
   },
+
+  unselected: {
+    color: "#ffffff",
+    "&:hover": {
+      color: "#1DB954",
+    },
+  },
 });
 
 export default function IconCheckboxes() {
   const classes = useStyles();
 
   return (
-    <div>
+    <div className="Icons">
       <Checkbox
         {...label}
-        icon={<FavoriteBorder />}
+        icon={<FavoriteBorder className={classes.unselected} />}
         checkedIcon={<Favorite className={classes.favorite} />}
       />
       <Checkbox
         {...label}
-        icon={<InsertCommentOutlinedIcon />}
+        icon={<InsertCommentOutlinedIcon className={classes.unselected} />}
         checkedIcon={<InsertCommentIcon className={classes.favorite} />}
       />
 
       <Checkbox
         {...label}
-        icon={<ShareOutlinedIcon />}
+        icon={<ShareOutlinedIcon className={classes.unselected} />}
         checkedIcon={<ShareIcon className={classes.favorite} />}
       />
     </div>

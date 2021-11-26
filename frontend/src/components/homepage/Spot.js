@@ -12,24 +12,15 @@ import Skeleton from "@mui/material/Skeleton";
 import Icons from "./Icons";
 
 function Media(props) {
-  
-  const { loading = false, chooseTrack } = props;
-    const { 
-    date_created, 
-    id, 
-    is_respot, 
-    spot_text,
-    spotify_json, 
-    user_id 
-  } = props.spotInfo || null;
 
-  const { 
-    artist,
-    title,
-    uri,
-    albumUrl
-  } = spotify_json ? spotify_json:"";
-  
+  console.log(props);
+  const { loading = false , chooseTrack } = props;
+  const { date_created, id, is_respot, spot_text, spotify_json, user_id } =
+    props.spotInfo || null;
+
+  const { artist, title, uri, albumUrl } = spotify_json ? spotify_json : "";
+
+
   return (
     <Card sx={{ maxWidth: "auto", m: 2 }}>
       <CardHeader
@@ -100,7 +91,7 @@ function Media(props) {
             <Skeleton animation="wave" height={10} width="80%" />
           </React.Fragment>
         ) : (
-          <Typography variant="body2" color="text.secondary" component="p">
+          <Typography variant="body2" component="p">
             {spot_text}
           </Typography>
         )}
@@ -115,7 +106,6 @@ Media.propTypes = {
 };
 
 export default function Spot(props) {
-
   return (
     <div>
       <Media spotInfo={props.spotInfo} chooseTrack={props.chooseTrack}/>
