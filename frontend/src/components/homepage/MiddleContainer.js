@@ -3,6 +3,9 @@ import { makeStyles } from "@mui/styles";
 import SpotList from "./SpotList";
 import SpotPostContainer from "./SpotPostContainer/SpotPostContainer.js";
 import axios from "axios"
+
+
+
 const useStyles = makeStyles({
   text: {
     color: "#1DB954",
@@ -47,10 +50,16 @@ const useStyles = makeStyles({
 // }, [isPosting])
 
 
-export default function MiddleContainer() {
+export default function MiddleContainer(props) {
   const classes = useStyles();
+
+
+
+
   const [spots, setSpots] = useState("")
   const [newPost, setNewPost] = useState(false)
+
+
   // const fetchSpots = () => {
   //   axios({
   //     method: "get",
@@ -81,16 +90,16 @@ export default function MiddleContainer() {
       console.log("MYRESULT:", result)
       setSpots(result.data);
     };
-    if (spots === ""){
+    if (spots === "") {
       fetchSpots();
     }
-    if (newPost === true){
+    if (newPost === true) {
       setNewPost(false);
       fetchSpots();
     }
   }, []);
-  
- 
+
+
 
   return (
     <div className={classes.text}>
@@ -98,7 +107,10 @@ export default function MiddleContainer() {
       <div>
         <SpotPostContainer setNewPost={setNewPost} />
       </div>
-      <SpotList spots={spots} />
+      <div>
+        <SpotList spots={spots} chooseTrack={props.chooseTrack} />
+      </div>
+
     </div>
   );
 }

@@ -7,7 +7,7 @@ export default function SpotList(props) {
   const spotListElements = props.spots ? props.spots.map((spot) => {
     // spot will have json data
     console.log("spot in SpotList", spot)
-    return <Spot spotInfo={spot} />
+    return <Spot spotInfo={spot} chooseTrack={props.chooseTrack} />
   }) : ""
 
 
