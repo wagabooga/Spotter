@@ -7,13 +7,15 @@ export const SelectedSong = (props) => {
         <button className="cancel-button" onClick={props.deselect}>
           x
         </button>
+        <div className="image">
+          <img src={props.albumUrl} />
+        </div>
         <div className="artist">
           <div>{props.artist}</div>
           <div>{props.title}</div>
         </div>
         {/* uri is used for the player */}
         {/* {props.uri} */}
-        <img src={props.albumUrl} />
       </div>
     </>
   );
