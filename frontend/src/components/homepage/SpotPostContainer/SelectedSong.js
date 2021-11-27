@@ -1,15 +1,22 @@
-import React from 'react'
+import React from "react";
 
 export const SelectedSong = (props) => {
   return (
-    <div>
-      {props.artist}
-      {props.title}
-      {/* uri is used for the player */}
-      {/* {props.uri} */}
-      <img src={props.albumUrl}/>
-      <button onClick={props.deselect}>Cancel</button>
-    </div>
-    
-  )
-}
+    <>
+      <div className="search-result">
+        <button className="cancel-button" onClick={props.deselect}>
+          x
+        </button>
+        <div className="image">
+          <img src={props.albumUrl} />
+        </div>
+        <div className="artist">
+          <div>{props.artist}</div>
+          <div>{props.title}</div>
+        </div>
+        {/* uri is used for the player */}
+        {/* {props.uri} */}
+      </div>
+    </>
+  );
+};

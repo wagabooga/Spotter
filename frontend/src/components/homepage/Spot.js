@@ -12,14 +12,12 @@ import Skeleton from "@mui/material/Skeleton";
 import Icons from "./Icons";
 
 function Media(props) {
-
   console.log(props);
   const { loading = false, chooseTrack, setPlay } = props;
   const { date_created, id, is_respot, spot_text, spotify_json, user_id } =
     props.spotInfo || null;
 
   const { artist, title, uri, albumUrl } = spotify_json ? spotify_json : "";
-
 
   return (
     <Card sx={{ maxWidth: "auto", m: 2 }}>
@@ -58,14 +56,14 @@ function Media(props) {
               style={{ marginBottom: 6 }}
             />
           ) : (
-            `My_Username (user_id) ${user_id}`
+            `${title}`
           )
         }
         subheader={
           loading ? (
             <Skeleton animation="wave" height={10} width="40%" />
           ) : (
-            `@(user_id) ${user_id}`
+            `@${artist}`
           )
         }
       />
@@ -79,16 +77,14 @@ function Media(props) {
           onClick={() => {
             // chooseTrack([uri])
             // setPlay((prev) => !prev)
-            console.log("HLSKDFSKDFSJDFKSJDF", uri)
+            console.log("HLSKDFSKDFSJDFKSJDF", uri);
             chooseTrack((prev) => ({
               playingTrack: [uri],
-              play: true
-            }))
-          }
-          }
+              play: true,
+            }));
+          }}
 
-
-        // alt="Nicola Sturgeon on a TED talk stage"
+          // alt="Nicola Sturgeon on a TED talk stage"
         />
       )}
       <CardContent>
@@ -119,7 +115,11 @@ Media.propTypes = {
 export default function Spot(props) {
   return (
     <div>
-      <Media spotInfo={props.spotInfo} chooseTrack={props.chooseTrack} setPlay={props.setPlay} />
+      <Media
+        spotInfo={props.spotInfo}
+        chooseTrack={props.chooseTrack}
+        setPlay={props.setPlay}
+      />
     </div>
   );
 }

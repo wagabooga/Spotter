@@ -22,8 +22,8 @@ export default function PostButton(props) {
   return (
     <Stack spacing={2} direction="row" justifyContent="end">
       <Button
-      //  spotTextValue={spotTextValue}
-      //  setSpotTextValue={setSpotTextValue}
+        //  spotTextValue={spotTextValue}
+        //  setSpotTextValue={setSpotTextValue}
         onClick={props.onClick}
         className={classes.btn}
         variant="text"
