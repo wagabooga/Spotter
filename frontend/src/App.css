@@ -21,22 +21,6 @@
   border-bottom: 1px solid white !important;
 }
 
-/* doesn't work */
-/* .css-1x51dt5-MuiInputBase-input-MuiInput-input:hover {
-  color: white !important;
-  border-bottom: 1px solid white !important;
-} */
-
-/* doesn't work */
-/* .css-1l5rin5-MuiInputBase-root-MuiInput-root::before {
-  border-bottom: 1px solid white !important;
-} */
-
-/* doesn't work */
-/* .css-1l5rin5-MuiInputBase-root-MuiInput-root::after {
-  border-bottom: 1px solid white !important;
-} */
-
 /* ----Post Boxes---- */
 .css-185gdzj-MuiCardHeader-root {
   color: white !important;
@@ -60,4 +44,54 @@
 
 .Icons {
   background-color: #2b2c2e;
+}
+
+/* ---background for music search */
+.music-search {
+  background-color: #2b2c2e;
+  border-radius: 5px;
+}
+
+/* ---Music selector from search bar */
+
+.d-flex {
+  display: flex;
+  justify-content: left;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  border-radius: 5px;
+  background-color: #2b2c2e !important;
+  border-bottom: black !important;
+}
+
+.d-flex:hover {
+  background-color: black !important;
+}
+
+.search-result {
+  display: flex;
+  flex-direction: row-reverse;
+  padding-top: 5px;
+  padding-left: 5px;
+  justify-content: flex-end;
+}
+
+.cancel-button {
+  background-color: white;
+  border-radius: 5px;
+  height: fit-content;
+  width: fit-content;
+}
+
+.cancel-button:hover {
+  background-color: yellowgreen;
+}
+
+.artist {
+  padding-top: 8px;
+  padding-right: 5px;
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
 }
