@@ -23,7 +23,7 @@ const queryCreateSpot = function (db, userID, spot_text, is_respot, spotify_json
 };
 
 const queryAllSpotsFromFollowing = function (db, userID) {
-  let query = `SELECT * FROM spots WHERE user_id IN (SELECT follows_id FROM follows WHERE followed_by_id = $1);`;
+  let query = `SELECT * FROM spots WHERE user_id IN (SELECT follows_id FROM follows WHERE followed_by_id = $1) ORDER BY id DESC;`;
   return db.query(query, [userID])
   .then((data) => {
     return data.rows;
