@@ -19,11 +19,18 @@ const useStyles = makeStyles({
 export default function PostButton(props) {
   const classes = useStyles();
 
+  // const onHandleclick = (e) => {
+  //   e.preventDefault();
+  //   console.log("Hello!")
+  // }
+  console.log("PROPS", props);
+
   return (
     <Stack spacing={2} direction="row" justifyContent="end">
       <Button
-      //  spotTextValue={spotTextValue}
-      //  setSpotTextValue={setSpotTextValue}
+        //  spotTextValue={spotTextValue}
+        //  setSpotTextValue={setSpotTextValue}
+
         onClick={props.onClick}
         className={classes.btn}
         variant="text"

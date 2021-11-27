@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import LeftSideBar from "./LeftSideBar";
 import MiddleContainer from "./MiddleContainer";
 import RightSideBar from "./RightSideBar";
@@ -33,18 +33,24 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function VariableWidthGrid() {
   const cookies = new Cookies();
   let accessToken = cookies.get("accessToken");
-  const [playingTrack, setPlayingTrack] = useState([])
-  const [play, setPlay] = useState(false)
+  const [playingTrack, setPlayingTrack] = useState([]);
+  const [play, setPlay] = useState(false);
   const [playTrackAndSong, setPlayTrackAndSong] = useState({
     playingTrack: [],
-    play: false
-  })
+    play: false,
+  });
+
+  const [refresh, setRefresh] = useState("");
+
+  useEffect(() => {
+    setRefresh(false);
+  }, [refresh]);
 
   let chooseTrack = function (track) {
-    console.log("Choosing Track", track)
-    setPlayingTrack(track)
-  }
- 
+    console.log("Choosing Track", track);
+    setPlayingTrack(track);
+  };
+
   return (
     // <ThemeProvider theme={theme}>
     <Box sx={{ flexGrow: 1 }}>
@@ -56,7 +62,11 @@ export default function VariableWidthGrid() {
         </Grid>
         <Grid item xs={6}>
           <Item>
-            <MiddleContainer chooseTrack={setPlayTrackAndSong} setPlay={setPlay}  />
+            <MiddleContainer
+              chooseTrack={setPlayTrackAndSong}
+              setPlay={setPlay}
+              setRefresh={setRefresh}
+            />
           </Item>
         </Grid>
         <Grid item xs={3}>
@@ -64,7 +74,14 @@ export default function VariableWidthGrid() {
             <RightSideBar />
           </Item>
         </Grid>
-      <Player accessToken={accessToken} playingTrack={playTrackAndSong.playingTrack} playTrackAndSong={playTrackAndSong} setPlayTrackAndSong={setPlayTrackAndSong} play={playTrackAndSong.play} setPlay={setPlay}/>
+        <Player
+          accessToken={accessToken}
+          playingTrack={playTrackAndSong.playingTrack}
+          playTrackAndSong={playTrackAndSong}
+          setPlayTrackAndSong={setPlayTrackAndSong}
+          play={playTrackAndSong.play}
+          setPlay={setPlay}
+        />
       </Grid>
     </Box>
     // </ThemeProvider>

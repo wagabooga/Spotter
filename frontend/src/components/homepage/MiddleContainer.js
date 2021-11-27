@@ -11,7 +11,6 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 
-
 const useStyles = makeStyles({
   text: {
     color: "#1DB954",
@@ -59,13 +58,15 @@ const Item = styled(Paper)(({ theme }) => ({
 //   fetchSpots()
 // }, [isPosting])
 
-
 export default function MiddleContainer(props) {
   const classes = useStyles();
 
-  const [spots, setSpots] = useState("")
-  const [newPost, setNewPost] = useState(false)
+  const [spots, setSpots] = useState("");
+  const [newPost, setNewPost] = useState(false);
 
+  // const settingRefresh = function () {
+  //   setRefresh(true);
+  // };
 
   useEffect(() => {
     const fetchSpots = async () => {
@@ -74,28 +75,27 @@ export default function MiddleContainer(props) {
         url: `http://localhost:8000/spots/2/following`,
       });
 
-      const spotsResultCopy = JSON.parse(JSON.stringify(spotsResult.data))
-      console.log("FFFFFFFFFFFFFFFFFFFFFFFFFFFF", spotsResult.data)
-      for (let spot of spotsResultCopy){
-        let trackUri = spot.spotify_json.uri
+      const spotsResultCopy = JSON.parse(JSON.stringify(spotsResult.data));
+      console.log("FFFFFFFFFFFFFFFFFFFFFFFFFFFF", spotsResult.data);
+      for (let spot of spotsResultCopy) {
+        let trackUri = spot.spotify_json.uri;
         // we split because spotify:track:3Ofmpyhv5UAQ70mENzB277 = track_uri (id)
-        const trackID = trackUri.split(":")[2]
-        console.log("trackID in loop middle container",trackID)
+        const trackID = trackUri.split(":")[2];
+        console.log("trackID in loop middle container", trackID);
         const trackResult = await axios({
           method: "get",
           url: `http://localhost:8000/spotify/tracks/${trackID}`,
         });
-        console.log("TRACKRESULT.DATA", trackResult.data)
-        const albumID = trackResult.data.tracks[0].album.id
+        console.log("TRACKRESULT.DATA", trackResult.data);
+        const albumID = trackResult.data.tracks[0].album.id;
         const albumResult = await axios({
           method: "get",
           url: `http://localhost:8000/spotify/albums/${albumID}`,
-        }); 
-        const bigImage = albumResult.data.images[0]
-        spot.spotify_json["bigImage"] = bigImage
+        });
+        const bigImage = albumResult.data.images[0];
+        spot.spotify_json["bigImage"] = bigImage;
       }
       setSpots(spotsResultCopy);
-
     };
     if (spots === "") {
       fetchSpots();
@@ -114,17 +114,23 @@ export default function MiddleContainer(props) {
             {/* <div className="Post-Box"> */}
             <div className={classes.text}>
               <h2>Home</h2>
-              <SpotPostContainer setNewPost={setNewPost} />
+              <SpotPostContainer
+                setNewPost={setNewPost}
+                setRefresh={props.setRefresh}
+              />
             </div>
           </Item>
         </Grid>
       </Grid>
       <div className={classes.text}>
-        <SpotList spots={spots} chooseTrack={props.chooseTrack} setPlay={props.setPlay}/>
+        <SpotList
+          spots={spots}
+          chooseTrack={props.chooseTrack}
+          setPlay={props.setPlay}
+        />
       </div>
 
       {/* </div> */}
     </Box>
-
   );
 }
