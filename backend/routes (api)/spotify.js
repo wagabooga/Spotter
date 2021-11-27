@@ -78,5 +78,18 @@ module.exports = (spotifyApiWrapper) => {
         console.log(err)
       })
   });
+
+  router.get("/users/get_spotify_info", (req, res) => {
+    // 4PICq5Ndi0cEWsyRAEWED6
+    spotifyApiWrapper.getUser('Codyle')
+    .then(function(data) {
+      if(data.body.images.url)
+      console.log('Some information about this user', data.body.images.url);
+    }, function(err) {
+      console.log('Something went wrong!', err);
+    });
+  
+  });
+
   return router;
 };

@@ -17,9 +17,24 @@ function Media(props) {
   const { loading = false, chooseTrack, setPlay } = props;
   const { date_created, id, is_respot, spot_text, spotify_json, user_id } =
     props.spotInfo || null;
-
-  const { artist, title, uri, albumUrl } = spotify_json ? spotify_json : "";
-
+  console.log("MEDIA spotify_json", spotify_json)
+  const { artist, title, uri, albumUrl, bigImage } = spotify_json ? spotify_json : "";
+  // useEffect(() => {
+  //     const fetchSpots = () => {
+  //       console.log("replace me")
+  //       // this is where the axios get goes
+  //       axios({
+  //         method: "get",
+  //         url: "http://localhost:8000/spotify/artist_info",
+  //       }).then(() => {
+  //         // setSpots here
+  //       }).catch((err) => {
+  //         console.log(err)
+  //       })
+  //     }
+  //     // do function call here to get spots ^
+  //     fetchSpots()
+  //   }, [isPosting])
 
   return (
     <Card sx={{ maxWidth: "auto", m: 2 }}>
@@ -58,14 +73,14 @@ function Media(props) {
               style={{ marginBottom: 6 }}
             />
           ) : (
-            `My_Username (user_id) ${user_id}`
+            `${title}`
           )
         }
         subheader={
           loading ? (
             <Skeleton animation="wave" height={10} width="40%" />
           ) : (
-            `@(user_id) ${user_id}`
+            `@${artist}`
           )
         }
       />

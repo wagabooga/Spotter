@@ -75,7 +75,7 @@ export default function MiddleContainer(props) {
       });
 
       const spotsResultCopy = JSON.parse(JSON.stringify(spotsResult.data))
-      console.log("FFFFFFFFFFFFFFFFFFFFFFFFFFFF", spotsResult.data)
+      console.log("Deep Copy spotsResult", spotsResult.data)
       for (let spot of spotsResultCopy){
         let trackUri = spot.spotify_json.uri
         // we split because spotify:track:3Ofmpyhv5UAQ70mENzB277 = track_uri (id)
