@@ -56,6 +56,8 @@ const queryGetUserById = function (db, userID) {
         return data.rows[0].id;
       });
   };
+  
+
 
   module.exports = (db) => {
 
@@ -125,6 +127,8 @@ const queryGetUserById = function (db, userID) {
     });
   });
 
+
+  
 
   return router;
 };

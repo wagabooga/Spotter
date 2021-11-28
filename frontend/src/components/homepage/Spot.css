@@ -20,7 +20,7 @@
 .spot-image-container {
   position: relative;
   width: 100%;
-  max-width: 400px;
+
 }
 .spot-image-container:hover .overlay {
   opacity: .80;

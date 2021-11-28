@@ -54,7 +54,7 @@ const homeRoutes = require("./routes (api)/home.js");
 app.use("/home", homeRoutes());
 
 const loginRoutes = require("./routes (api)/login.js");
-app.use("/login", loginRoutes(spotifyApiWrapper));
+app.use("/login", loginRoutes(spotifyApiWrapper, db));
 
 const spotifyRoutes = require("./routes (api)/spotify.js");
 app.use("/spotify", spotifyRoutes(spotifyApiWrapper));

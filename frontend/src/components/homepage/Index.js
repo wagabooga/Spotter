@@ -33,6 +33,7 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function VariableWidthGrid() {
   const cookies = new Cookies();
   let accessToken = cookies.get("accessToken");
+  let user_id = cookies.get("user_id")
   const [playingTrack, setPlayingTrack] = useState([]);
   const [play, setPlay] = useState(false);
   const [playTrackAndSong, setPlayTrackAndSong] = useState({
@@ -61,6 +62,7 @@ export default function VariableWidthGrid() {
             <MiddleContainer
               chooseTrack={setPlayTrackAndSong}
               setPlay={setPlay}
+              userIdCookie={user_id}
             />
           </Item>
         </Grid>
