@@ -23,7 +23,7 @@
 
 }
 .spot-image-container:hover .overlay {
-  opacity: .80;
+  opacity: .55;
 }
 
 .play-button-icon {

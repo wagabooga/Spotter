@@ -13,7 +13,7 @@ import Icons from "./Icons";
 import { useState } from "react";
 import { makeStyles } from "@mui/styles";
 import "./Spot.css"
-const playButtonURL = "https://www.vhv.rs/dpng/d/607-6073194_play-icon-white-png-transparent-png.png"
+const playButtonURL = "https://i.ibb.co/TLcgkDL/Play-Button.png"
 
 
 const useStyles = makeStyles({
