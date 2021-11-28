@@ -17,9 +17,11 @@ const Item = styled(Box)(({ theme }) => ({
 
 export default function LandingPage() {
   return (
-    <Box sx={{ flexGrow: 2 }}>
-      <Grid container spacing={0} columns={16}>
-        <Grid item xs={10}>
+    <Box
+    // sx={{ flexGrow: 2 }}
+    >
+      <Grid container spacing={0}>
+        <Grid item xs={12} md={8}>
           <Item>
             <img
               src="https://abs.twimg.com/sticky/illustrations/lohp_en_1302x955.png"
@@ -29,7 +31,7 @@ export default function LandingPage() {
             ></img>
           </Item>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={3}>
           <Item>
             <h1>Happening now</h1>
             <h3>Join Spotter Today.</h3>
