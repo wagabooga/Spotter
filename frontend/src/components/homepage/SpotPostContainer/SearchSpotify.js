@@ -65,7 +65,8 @@ function SearchSpotify(props) {
   }, [search]);
 
   const { classes } = props;
-  const searchResultsContainerStyle = searchResults.length > 0 ? { overflowY: "scroll", height:222} : {}
+  const searchResultsContainerStyle =
+    searchResults.length > 0 ? { overflowY: "scroll", height: 222 } : {};
   return (
     <Box
       component="form"

@@ -8,14 +8,12 @@ const express = require("express");
 const router = express.Router();
 const axios = require("axios");
 
-
-const queryGetUserByEmail = function (db, email) {
+const queryAmIRegistered = function (db, email) {
   let query = `SELECT * FROM users WHERE email = $1`;
-  return db.query(query, [email])
-  .then((data) => {
+  return db.query(query, [email]).then((data) => {
     return data.rows[0];
-    });
-  };
+  });
+};
 // router
 module.exports = (spotifyApiWrapper, db) => {
   // redirect is for when we click on front end page, we send them to  localhost:8000/login/redirect to grab the code (step 1) auth code flow
@@ -49,28 +47,26 @@ module.exports = (spotifyApiWrapper, db) => {
       })
       .then(function (rsp) {
         req.cookies.email = rsp.body.email;
-        queryGetUserByEmail(db, rsp.body.email)
-        .then((user) => {
-          console.log("BACKEND USERID", user.id)
-          res.cookie("user_id",user.id)
-          res.redirect(`http://localhost:3000/home`);
-        })
-        // if (!queryAmIRegistered) {
-        //   return axios({
-        //     method: "post",
-        //     url: "http://localhost:8000/users/create",
-        //     data: { email: rsp.body.email },
-        //   });
-        // }
-
+        // queryGetUserByEmail(db, rsp.body.email).then((user) => {
+        //   // console.log("BACKEND USERID", user.id);
+        //   // res.cookie("user_id", user.id);
+        // });
+        if (!queryAmIRegistered) {
+          return axios({
+            method: "post",
+            url: "http://localhost:8000/users/create",
+            data: { email: rsp.body.email },
+          });
+        }
       })
-      // .then((id) => {
-      //   res.cookie("user_id", id)
-      //   return spotifyApiWrapper.getMyDevices();
-      // })
-      // .then(() => {
-      //   // res.cookie("device", response.body.devices[0].id);
-      // })
+      .then((id) => {
+        req.cookies.user_id = id;
+        return spotifyApiWrapper.getMyDevices();
+      })
+      .then((response) => {
+        res.cookie("device", response.body.devices[0].id);
+        res.redirect(`http://localhost:3000/home`);
+      })
       .catch((err) => {
         console.log("err:", err);
         res.sendStatus(400);
