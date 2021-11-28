@@ -33,38 +33,50 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function VariableWidthGrid() {
   const cookies = new Cookies();
   let accessToken = cookies.get("accessToken");
-  const [playingTrack, setPlayingTrack] = useState([])
-  const [play, setPlay] = useState(false)
+  const [playingTrack, setPlayingTrack] = useState([]);
+  const [play, setPlay] = useState(false);
   const [playTrackAndSong, setPlayTrackAndSong] = useState({
     playingTrack: [],
-    play: false
-  })
+    play: false,
+  });
 
   let chooseTrack = function (track) {
-    console.log("Choosing Track", track)
-    setPlayingTrack(track)
-  }
- 
+    console.log("Choosing Track", track);
+    setPlayingTrack(track);
+  };
+
   return (
     // <ThemeProvider theme={theme}>
-    <Box sx={{ flexGrow: 1 }}>
+    <Box
+    // sx={{ flexGrow: 1 }}
+    >
       <Grid container spacing={0.5}>
-        <Grid item xs>
+        <Grid item xs={12} md={3}>
           <Item>
             <LeftSideBar />
           </Item>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <Item>
-            <MiddleContainer chooseTrack={setPlayTrackAndSong} setPlay={setPlay}  />
+            <MiddleContainer
+              chooseTrack={setPlayTrackAndSong}
+              setPlay={setPlay}
+            />
           </Item>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={12} md={3}>
           <Item>
             <RightSideBar />
           </Item>
         </Grid>
-      <Player accessToken={accessToken} playingTrack={playTrackAndSong.playingTrack} playTrackAndSong={playTrackAndSong} setPlayTrackAndSong={setPlayTrackAndSong} play={playTrackAndSong.play} setPlay={setPlay}/>
+        <Player
+          accessToken={accessToken}
+          playingTrack={playTrackAndSong.playingTrack}
+          playTrackAndSong={playTrackAndSong}
+          setPlayTrackAndSong={setPlayTrackAndSong}
+          play={playTrackAndSong.play}
+          setPlay={setPlay}
+        />
       </Grid>
     </Box>
     // </ThemeProvider>
