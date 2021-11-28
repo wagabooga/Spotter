@@ -12,20 +12,19 @@ import Skeleton from "@mui/material/Skeleton";
 import Icons from "./Icons";
 import { useState } from "react";
 import { makeStyles } from "@mui/styles";
-import "./Spot.css"
-const playButtonURL = "https://www.vhv.rs/dpng/d/607-6073194_play-icon-white-png-transparent-png.png"
-
+import "./Spot.css";
+const playButtonURL =
+  "https://www.vhv.rs/dpng/d/607-6073194_play-icon-white-png-transparent-png.png";
 
 const useStyles = makeStyles({
   albumCover: {
     display: "block",
     width: "100%",
-    height: "auto"
-  }
+    height: "auto",
+  },
 });
 
 function Media(props) {
-  console.log(props);
   const { loading = false, chooseTrack, setPlay } = props;
   const { date_created, id, is_respot, spot_text, spotify_json, user_id } =
     props.spotInfo || null;
@@ -93,24 +92,25 @@ function Media(props) {
               playingTrack: [uri],
               play: true,
             }));
-          }}>
-
-          {isPlayOverlayShown &&
+          }}
+        >
+          {isPlayOverlayShown && (
             <div className="overlay">
               <img
                 style={{ height: "100%", width: "100%" }}
                 src={playButtonURL}
-                className="play-button-icon" />
-            </div>}
+                className="play-button-icon"
+              />
+            </div>
+          )}
           <CardMedia
             component="img"
             height="100%"
             image={spotify_json.bigImage.url}
-
             className={classes.albumCover}
-          // onHover={this.image = playButtonURL }
-          // onMouseLeave={()=> setIsShown(false)}
-          // alt="Nicola Sturgeon on a TED talk stage"
+            // onHover={this.image = playButtonURL }
+            // onMouseLeave={()=> setIsShown(false)}
+            // alt="Nicola Sturgeon on a TED talk stage"
           />
         </div>
       )}

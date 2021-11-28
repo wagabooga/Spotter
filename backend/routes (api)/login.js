@@ -47,10 +47,7 @@ module.exports = (spotifyApiWrapper, db) => {
       })
       .then(function (rsp) {
         req.cookies.email = rsp.body.email;
-        // queryGetUserByEmail(db, rsp.body.email).then((user) => {
-        //   // console.log("BACKEND USERID", user.id);
-        //   // res.cookie("user_id", user.id);
-        // });
+
         if (!queryAmIRegistered) {
           return axios({
             method: "post",

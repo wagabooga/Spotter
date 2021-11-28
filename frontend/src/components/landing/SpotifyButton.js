@@ -33,7 +33,7 @@ export default function SpotifyButton() {
         return `https://accounts.spotify.com/authorize?client_id=${response.data.client_id}${response.data.url_body}`;
       })
       .catch((err) => {
-        console.log("myresponse:", err);
+        console.log(err);
       });
   };
 

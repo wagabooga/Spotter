@@ -24,7 +24,6 @@ function SpotText(props) {
         },
       })
         .then((response) => {
-          console.log("axios response after post", response);
           props.setNewPost(true);
           props.setSpotTextValue("");
           props.setSelectedSongData(null);

@@ -71,17 +71,17 @@ export default function MiddleContainer(props) {
       });
 
       const spotsResultCopy = JSON.parse(JSON.stringify(spotsResult.data));
-      console.log("FFFFFFFFFFFFFFFFFFFFFFFFFFFF", spotsResult.data);
+
       for (let spot of spotsResultCopy) {
         let trackUri = spot.spotify_json.uri;
         // we split because spotify:track:3Ofmpyhv5UAQ70mENzB277 = track_uri (id)
         const trackID = trackUri.split(":")[2];
-        console.log("trackID in loop middle container", trackID);
+
         const trackResult = await axios({
           method: "get",
           url: `http://localhost:8000/spotify/tracks/${trackID}`,
         });
-        console.log("TRACKRESULT.DATA", trackResult.data);
+
         const albumID = trackResult.data.tracks[0].album.id;
         const albumResult = await axios({
           method: "get",

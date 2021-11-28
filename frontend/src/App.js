@@ -4,8 +4,6 @@ import React, { useState } from "react";
 import LandingPage from "./components/landing/LandingPage";
 import Home from "./components/homepage/Index";
 
-
-
 // cookies.set('myCat', 'Pacman', { path: '/' });
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -32,9 +30,6 @@ const theme = createTheme({
 });
 
 export default function App() {
-
-
-
   // let playButton = function (accessToken, device) {
   //   fetch(`https://api.spotify.com/v1/me/player/play?device_id=${device}`, {
   //     method: "PUT",
@@ -77,12 +72,7 @@ export default function App() {
         <div>
           <Routes>
             <Route path="/home" element={<Home />} />
-            <Route
-              path="/landing"
-              // playButton={playButton}
-              element={<LandingPage  />}
-            />
-            {/* <Route path="/register" element={<Register />} /> */}
+            <Route path="/landing" element={<LandingPage />} />
           </Routes>
         </div>
       </ThemeProvider>

@@ -5,8 +5,6 @@
 const express = require("express");
 const router = express.Router();
 
-
-
 module.exports = (spotifyApiWrapper) => {
   /*  getUserPlaylists('*spotify username*')
       {
@@ -23,74 +21,77 @@ module.exports = (spotifyApiWrapper) => {
         "owner":{"display_name":"wagabooga","external_urls":{"spotify":"https://open.spotify.com/user/wagabooga"}
   */
   router.get("/playlists", (req, res) => {
-    spotifyApiWrapper.getUserPlaylists()
-      .then(function (data) {
-        res.json(data.body)
-      }, function (err) {
-        console.log('Something went wrong!', err);
-      });
+    spotifyApiWrapper.getUserPlaylists().then(
+      function (data) {
+        res.json(data.body);
+      },
+      function (err) {
+        console.log("Something went wrong!", err);
+      }
+    );
   });
 
-
   router.get("/searchTrack/:id", (req, res) => {
-    spotifyApiWrapper.searchTracks(req.params.id)
-      .then(function (data) {
-        console.log("data.body.tracks.items", data.body.tracks.items)
-        res.json(data.body.tracks.items)
-      }, function (err) {
-        console.error(err);
-      })
+    spotifyApiWrapper
+      .searchTracks(req.params.id)
+      .then(
+        function (data) {
+          res.json(data.body.tracks.items);
+        },
+        function (err) {
+          console.error(err);
+        }
+      )
       .catch((err) => {
-        console.log(err)
-      })
+        console.log(err);
+      });
   });
 
   router.get("/devices", (req, res) => {
-    spotifyApiWrapper.getMyDevices()
-      .then(function (data) {
+    spotifyApiWrapper.getMyDevices().then(
+      function (data) {
         let availableDevices = data.body.devices;
-        // console.log(availableDevices);
-      }, function (err) {
-        console.log('Something went wrong!', err);
-      });
+      },
+      function (err) {
+        console.log("Something went wrong!", err);
+      }
+    );
   });
 
   router.get("/albums/:album_id", (req, res) => {
     // '5U4W9E5WsYb2jUQWePT8Xm'
-    spotifyApiWrapper.getAlbum(req.params.album_id)
+    spotifyApiWrapper
+      .getAlbum(req.params.album_id)
       .then(function (data) {
-        console.log('Album information', data.body);
-        res.json(data.body)
+        res.json(data.body);
       })
       .catch((err) => {
-        console.log(err)
-      })
+        console.log(err);
+      });
   });
 
   router.get("/tracks/:track_id", (req, res) => {
     // 4PICq5Ndi0cEWsyRAEWED6
-    spotifyApiWrapper.getTracks([req.params.track_id])
+    spotifyApiWrapper
+      .getTracks([req.params.track_id])
       .then(function (data) {
-        console.log('Track information', data.body[0]);
-        res.json(data.body)
+        res.json(data.body);
       })
       .catch((err) => {
-        console.log(err)
-      })
+        console.log(err);
+      });
   });
   router.get("/artists/:artist_id", (req, res) => {
     // "1uU7g3DNSbsu0QjSEqZtEd"
-    spotifyApiWrapper.getArtist([req.params.artist_id])
+    spotifyApiWrapper
+      .getArtist([req.params.artist_id])
       .then(function (data) {
-        console.log('Artist information', data.body[0]);
-        res.json(data.body)
+        res.json(data.body);
       })
       .catch((err) => {
-        console.log(err)
-      })
+        console.log(err);
+      });
   });
-
-
 
   return router;
 };

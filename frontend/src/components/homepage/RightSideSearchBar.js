@@ -30,7 +30,6 @@ function SearchSpotify(props) {
   }
 
   useEffect(() => {
-    console.log("search results", searchResults);
     if (!search) return setSearchResults([]);
     let cancel = false;
     // find out how to use search here so we can use that as a variable
@@ -39,9 +38,8 @@ function SearchSpotify(props) {
         method: "get",
         url: `http://localhost:8000/spotify/searchTrack/${search}`,
       }).then((res) => {
-        console.log("myres:", res);
         if (cancel) return;
-        console.log("res.body.map", res.data);
+
         setSearchResults(
           res.data.map((track) => {
             const smallestAlbumImage = track.album.images.reduce(
