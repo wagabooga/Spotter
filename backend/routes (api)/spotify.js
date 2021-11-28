@@ -78,5 +78,19 @@ module.exports = (spotifyApiWrapper) => {
         console.log(err)
       })
   });
+  router.get("/artists/:artist_id", (req, res) => {
+    // "1uU7g3DNSbsu0QjSEqZtEd"
+    spotifyApiWrapper.getArtist([req.params.artist_id])
+      .then(function (data) {
+        console.log('Artist information', data.body[0]);
+        res.json(data.body)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  });
+
+
+
   return router;
 };

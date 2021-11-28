@@ -64,9 +64,10 @@ export default function MiddleContainer(props) {
 
   useEffect(() => {
     const fetchSpots = async () => {
+      const userIdCookie = props.userIdCookie ? props.userIdCookie : 2
       const spotsResult = await axios({
         method: "get",
-        url: `http://localhost:8000/spots/2/following`,
+        url: `http://localhost:8000/spots/${userIdCookie}/following`,
       });
 
       const spotsResultCopy = JSON.parse(JSON.stringify(spotsResult.data));
@@ -85,9 +86,17 @@ export default function MiddleContainer(props) {
         const albumResult = await axios({
           method: "get",
           url: `http://localhost:8000/spotify/albums/${albumID}`,
-        });
-        const bigImage = albumResult.data.images[0];
-        spot.spotify_json["bigImage"] = bigImage;
+
+        }); 
+        const bigImage = albumResult.data.images[0]
+        spot.spotify_json["bigImage"] = bigImage
+        const artistID = albumResult.data.artists[0].id
+        const artistResult = await axios({
+          method: "get",
+          url: `http://localhost:8000/spotify/artists/${artistID}`,
+        }); 
+        const artistImage = artistResult.data.images[0]
+        spot.spotify_json["artistImage"] = artistImage
       }
       setSpots(spotsResultCopy);
     };

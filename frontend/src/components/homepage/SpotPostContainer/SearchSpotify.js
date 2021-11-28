@@ -65,7 +65,7 @@ function SearchSpotify(props) {
   }, [search]);
 
   const { classes } = props;
-
+  const searchResultsContainerStyle = searchResults.length > 0 ? { overflowY: "scroll", height:222} : {}
   return (
     <Box
       component="form"
@@ -91,7 +91,8 @@ function SearchSpotify(props) {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-      <div className="flex-grow-1 my-2" style={{ overflowY: "auto" }}>
+      {/* TODO: change the height to show 3 results */}
+      <div className="flex-grow-1 my-2" style={searchResultsContainerStyle}>
         {searchResults.map((track) => (
           <TrackSearchResult
             track={track}
