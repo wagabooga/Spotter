@@ -9,20 +9,6 @@ import Grid from "@mui/material/Grid";
 import Player from "./Player";
 import Cookies from "universal-cookie";
 
-// import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-// const theme = createTheme({
-// palette: {
-//   mode: "dark",
-// },
-
-//   typography: {
-//     fontFamily: "Raleway",
-//     fontWeightLight: 400,
-//     fontWeightBold: 700,
-//   },
-// });
-
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(3),
@@ -47,10 +33,7 @@ export default function VariableWidthGrid() {
   };
 
   return (
-    // <ThemeProvider theme={theme}>
-    <Box
-    // sx={{ flexGrow: 1 }}
-    >
+    <Box>
       <Grid container spacing={0.5}>
         <Grid item xs={12} md={3}>
           <Item>
@@ -81,6 +64,5 @@ export default function VariableWidthGrid() {
         />
       </Grid>
     </Box>
-    // </ThemeProvider>
   );
 }

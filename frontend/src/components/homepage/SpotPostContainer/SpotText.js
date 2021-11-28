@@ -14,24 +14,20 @@ const styles = (theme) => ({
 
 function SpotText(props) {
   function submitSpot() {
-    console.log(
-      "submitting tweet values:",
-      props.selectedSongData,
-      props.spotTextValue
-    );
     if (props.spotTextValue && props.selectedSongData) {
       axios({
         method: "post",
         url: "http://localhost:8000/spots/create",
         data: {
           selectedSongData: props.selectedSongData,
-
           spotTextValue: props.spotTextValue,
         },
       })
         .then((response) => {
           console.log("axios response after post", response);
           props.setNewPost(true);
+          props.setSpotTextValue("");
+          props.setSelectedSongData(null);
         })
         .then((response) => {
           console.log("axios response after post", response);
@@ -52,13 +48,9 @@ function SpotText(props) {
       noValidate
       autoComplete="off"
     >
-      {/* <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-      <TextField id="filled-basic" label="Filled" variant="filled" /> */}
       <TextField
         InputProps={{
           classes: {
-            // root: classes.cssOutlinedInput,
-            // focused: classes.cssFocused,
             notchedOutline: classes.notchedOutline,
           },
         }}
