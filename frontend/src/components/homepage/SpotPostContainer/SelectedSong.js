@@ -7,7 +7,7 @@ export const SelectedSong = (props) => {
         <button className="cancel-button" onClick={props.deselect}>
           x
         </button>
-        <div className="image">
+        <div className="image-container">
           <img src={props.albumUrl} />
         </div>
         <div className="artist">

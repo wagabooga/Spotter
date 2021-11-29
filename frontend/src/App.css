@@ -74,7 +74,6 @@
   flex-direction: row;
   padding-top: 5px;
   padding-left: 5px;
-  justify-content: flex-start;
 }
 
 .cancel-button {
@@ -99,7 +98,7 @@
   flex-direction: column;
 }
 
-.image {
+.image-container {
   padding-left: 15px;
   padding-top: 5px;
 }
