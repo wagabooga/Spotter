@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@mui/styles";
 import SpotList from "./SpotList";
 import SpotPostContainer from "./SpotPostContainer/SpotPostContainer.js";
+import CircularProgressWithLabel from "./Progress";
 
 import axios from "axios";
 
@@ -61,6 +62,7 @@ export default function MiddleContainer(props) {
 
   const [spots, setSpots] = useState("");
   const [newPost, setNewPost] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchSpots = async () => {
@@ -115,6 +117,8 @@ export default function MiddleContainer(props) {
           <Item>
             <div className={classes.text}>
               <h2>Home</h2>
+              {/* {!loading && <CircularProgressWithLabel />}
+              {loading && <CircularProgressWithLabel />} */}
               <SpotPostContainer setNewPost={setNewPost} />
             </div>
           </Item>
