@@ -28,8 +28,8 @@ export default function MenuListComposition() {
       <ProfilePicture />
 
       <MenuList>
+        <Link className={classes.leftNavLink} to="/landing"><MenuItem className={classes.leftNav}>Logout</MenuItem></Link>
         <Link className={classes.leftNavLink} to="/home"><MenuItem className={classes.leftNav}>Home</MenuItem></Link>
-        <Link className={classes.leftNavLink} to="/landing"><MenuItem className={classes.leftNav}>Landing</MenuItem></Link>
         <MenuItem className={classes.leftNav}>Notifications</MenuItem>
         <MenuItem className={classes.leftNav}>Messages</MenuItem>
         <MenuItem className={classes.leftNav}>Profile</MenuItem>
