@@ -92,6 +92,16 @@ module.exports = (spotifyApiWrapper) => {
         console.log(err);
       });
   });
+  router.get("/playback_state", (req, res) => {
+    spotifyApiWrapper
+      .getMyCurrentPlaybackState()
+      .then(function (data) {
+        console.log("BACKEND DATA THING", data.body)
+        res.json(data.body)
+      }).catch((err) => {
+        console.log('Something went wrong!', err);
+      })
+  });
 
   return router;
 };
