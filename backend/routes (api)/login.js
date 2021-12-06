@@ -61,7 +61,7 @@ module.exports = (spotifyApiWrapper, db) => {
         return spotifyApiWrapper.getMyDevices();
       })
       .then((response) => {
-        res.cookie("device", response.body.devices[0].id);
+        // res.cookie("device", response.body.devices[0].id);
         res.redirect(`http://localhost:3000/home`);
       })
       .catch((err) => {

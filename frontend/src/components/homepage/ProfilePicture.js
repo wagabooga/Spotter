@@ -17,7 +17,7 @@ export default function ImageAvatars() {
     <Stack direction="row" spacing={2}>
       <Avatar
         alt="Spotter"
-        // src="/static/images/avatar/1.jpg"
+        src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg"
         sx={{ width: 70, height: 70 }}
       />
       <Typography className={classes.text}>
