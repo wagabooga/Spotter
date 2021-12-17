@@ -1,7 +1,7 @@
 # Spotter
 ## About this app
-This App was Sarah Keashly and I's final project for LHL. 
-We created a modern, reactive, and response social media app designed to share and play music with your friends.
+Spotter is a social media app similar to twitter, where instead of writing tweets, you post a spot.
+Spotter also has playback functionality. thanks to Spotify's API we are a
 
 ## Screenshots
 
@@ -13,17 +13,18 @@ We created a modern, reactive, and response social media app designed to share a
 !["mobile"](https://github.com/wagabooga/Spotter/blob/master/planning/readmePics/mobile.png?raw=true)
 
 ## Setup
+needs Postgres DB, spotify developer dashboard for tokens.
+frontend-> npm start
+backend-> npm start
 
-Install dependencies with `npm install` from the frontend folder and backend respectively
-
-## Running Webpack Development Server
-
-inside both folders, start the react project with "npm start"
-
+##
 ## Dev Notes
 I'm still working on an updated version of Spotter, I plan to release and publish this and am working as hard as I can to get this made.
 Some features i'd love to add are:
 - Find mutual followers off Spotify -> reccommend them for a logged in spotter user
+- data on users faviroute genres
 - visually show a different user page, as well as a button to add them to our followers
 - impliment other features such as youtube music, soundcloud, and uploading raw audio files
-- and much more... 
+
+Completed features:
+Dec-15-2021; base chat app for messaging
